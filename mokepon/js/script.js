@@ -120,26 +120,18 @@ function combate(){
     console.log(ataqueEnemigo + ' E')
 
     if(ataqueJugador == ataqueEnemigo){
-        tipoAtaqueJugador.innerHTML = ataqueJugador;
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
-        resultadoCombate.innerHTML  = 'Empate';
+        resultado  = 'Empate';
     }else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO'){
-        tipoAtaqueJugador.innerHTML = ataqueJugador;
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
-        resultadoCombate.innerHTML  = 'GANASTE';
+        resultado  = 'GANASTE';
     }else if(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA'){
-        tipoAtaqueJugador.innerHTML = ataqueJugador;
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
-        resultadoCombate.innerHTML  = 'GANASTE';
+        resultado  = 'GANASTE';
     }else if(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA'){
-        tipoAtaqueJugador.innerHTML = ataqueJugador;
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
-        resultadoCombate.innerHTML  = 'GANASTE';
+        resultado  = 'GANASTE';
     }else{
-        tipoAtaqueJugador.innerHTML = ataqueJugador;
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
-        resultadoCombate.innerHTML  = 'PERDISTE';
     }
+    tipoAtaqueJugador.innerHTML = ataqueJugador;
+    tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
+    resultadoCombate.innerHTML  = resultado;
 }
 
 window.addEventListener('load', iniciarJuego);
