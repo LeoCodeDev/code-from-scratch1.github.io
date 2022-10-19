@@ -63,7 +63,7 @@ function seleccionarMascotaJugador(){
     }
     mascotaJugador.innerHTML = seleccionado;
     seleccionarMascotasEnemigo();
-    if(seleccionado = 'block'){
+    if(seleccionado != ''){
         habilitarSecciones(seccionAtaque);
         habilitarSecciones(seccionMensajes);
     }
