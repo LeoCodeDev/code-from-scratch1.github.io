@@ -63,7 +63,7 @@ function seleccionarMascotaJugador(){
     }
     mascotaJugador.innerHTML = seleccionado;
     seleccionarMascotasEnemigo();
-    if(seleccionado != ''){
+    if(seleccionado = 'block'){
         habilitarSecciones(seccionAtaque);
         habilitarSecciones(seccionMensajes);
     }
@@ -174,7 +174,7 @@ function inhabilitarBotones(){
 }
 
 function habilitarSecciones(elemento){
-    elemento.style.display = '';
+    elemento.style.display = 'block';
 }
 
 function reiniciarJuego(){
