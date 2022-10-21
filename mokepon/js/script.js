@@ -23,10 +23,10 @@ const botonAgua             = document.getElementById('boton-agua');
 const botonTierra           = document.getElementById('boton-tierra');
 const botonReiniciar        = document.getElementById('boton-reiniciar');
 const seccionAtaque         = document.getElementById('seleccionar-ataque')
-const seccionMensajes       = document.getElementById('mensajes')
-const seccionReiniciar      = document.getElementById('reiniciar')
-const contenedorSeleccion   = document.getElementById('contenedor-seleccion')
-const contenedorReiniciar   = document.getElementById('contenedor-reiniciar')
+const seccionMensajes       = document.getElementById('mensajes');
+const seccionReiniciar      = document.getElementById('reiniciar');
+const contenedorSeleccion   = document.getElementById('contenedor-seleccion');
+const contenedorReiniciar   = document.getElementById('contenedor-reiniciar');
 
 
 
@@ -67,8 +67,8 @@ function seleccionarMascotaJugador(){
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
-        habilitarSecciones(seccionAtaque,'block');
-        habilitarSecciones(seccionMensajes,'block');
+        habilitarSecciones(seccionAtaque,'flex');
+        habilitarSecciones(seccionMensajes,'flex');
     }
 }
 
@@ -132,12 +132,19 @@ function combate(){
     }
 
     if(ataqueJugador == ataqueEnemigo){
+        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
+        tipoAtaqueJugador.innerHTML = ataqueJugador
         resultadoCombate  = 'Empate';
     }else if((ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO')||(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA')||(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA')){
+        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
+        tipoAtaqueJugador.innerHTML = ataqueJugador
         resultadoCombate  = 'GANASTE';
         vidasEnemigo--;
         vidaMascotaEnemigo.innerHTML = vidasEnemigo;
+        ti
     }else{
+        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
+        tipoAtaqueJugador.innerHTML = ataqueJugador
         resultadoCombate = 'PERDISTE'
         vidasJugador--;
         vidaMascotaJugador.innerHTML = vidasJugador;
@@ -148,20 +155,20 @@ function combate(){
 
 function revisarVidas(){
     if(vidasEnemigo == 0){
-        crearMensaje(`<p>Ganaste!!!, Tu ${seleccionado} es muy Fuerte.</p>`)
+        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado} es muy Fuerte.</p>`)
         inhabilitarBotones();
-        habilitarSecciones(seccionReiniciar,'block');
+        habilitarSecciones(seccionReiniciar,'flex');
     }else if(vidasJugador == 0){
-        crearMensaje(`<p>Perdiste!!!, Tu ${seleccionado} es muy Debil aun.</p>`)
+        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado} es muy Debil aun.</p>`)
         inhabilitarBotones();
-        habilitarSecciones(seccionReiniciar,'block');
+        habilitarSecciones(seccionReiniciar,'flex');
     }else if(vidasEnemigo > 0 && vidasJugador > 0){
-        crearMensaje(`<p>Tu mascota ataco con ${ataqueJugador}, la mascota del enemigo ataco con ${ataqueEnemigo} - ${resultadoCombate}</p>`);
+        //crearMensaje(seccionMensajes,`<p>Tu mascota ataco con <span class="${ataqueJugador}">${ataqueJugador}</span>, la mascota del enemigo ataco con <span class="${ataqueEnemigo}">${ataqueEnemigo}</span> - <span class="${resultadoCombate}">${resultadoCombate}</span></p>`);
     }
 }
 
-function crearMensaje(textoHTML){
-    seccionMensajes.innerHTML += textoHTML;
+function crearMensaje(slector,textoHTML){
+    slector.innerHTML += textoHTML;
 }
 
 function inhabilitarBotones(){
