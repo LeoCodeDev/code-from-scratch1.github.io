@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <section id="sleccionar-mascota" class="seleccionar-mokepones">
+        <h1 id="titulo">Mokepon</h1>
+        <div class="contenedor-seleccion" id="contenedor-seleccion">
+            <h2 class="sub-titulo">Elige a tu mascota</h2>
+            <div class="tarjetas-mokepones">
+                <input type="radio" name="mascotas" id="hipodoge" class="radius-inputs">
+                <label for="hipodoge" class="mokepones">
+                    <p>Hipodoge</p>
+                    <img src="assets/hipodoge.png" alt="hipodegue">
+                </label>
+                <input type="radio" name="mascotas" id="capipepo" class="radius-inputs">
+                <label for="capipepo" class="mokepones">
+                    <p>Capipepo</p>
+                    <img src="assets/capipepo.png" alt="Capipepo">
+                </label>
+                <input type="radio" name="mascotas" id="ratigüeya" class="radius-inputs">
+                <label for="ratigüeya" class="mokepones">
+                    <p>Ratigüeya</p>
+                    <img src="assets/ratigueya.png" alt="ratigüeya">
+                </label>
+                <input type="radio" name="mascotas" id="langostelvis" class="radius-inputs">
+                <label for="langostelvis" class="mokepones">
+                    <p>Langostelvis</p>
+                    <img src="assets/langostelvis.png" alt="langostelvis">
+                </label>
+                <input type="radio" name="mascotas" id="tucapalma" class="radius-inputs">
+                <label for="tucapalma" class="mokepones">
+                    <p>Tucapalma</p>
+                    <img src="assets/tucapalma.png" alt="tucapalma">
+                </label>
+                <input type="radio" name="mascotas" id="pydos" class="radius-inputs">
+                <label for="pydos" class="mokepones">
+                    <p>Pydos</p>
+                    <img src="assets/pydos.png" alt="pydos">
+                </label>
+            </div>
+            <button id="boton-mascotas">Seleccionar</button>
+            
+        </div>
+    </section>
+    
+    <section id="seleccionar-ataque">
+        <h2>Elige a tu ataque</h2>
+        <div>
+            <button id="boton-fuego">Fuego 🔥</button>
+            <button id="boton-agua">Agua 💧</button>
+            <button id="boton-tierra">Tierra 🌱</button>
+        </div>
+        <div>
+            <p>Tu <span id="mascota-jugador">Mascota</span> tiene <span id="vida-mascota-jugador">3</span> vidas</p>
+            <p>EL <span id="mascota-enemigo">Mascota</span> del enemigo tiene <span id="vida-mascota-enemigo">3</span> vidas</p>
+        </div>
+    </section>
+
+    <section id="reiniciar">
+        <button id="boton-reiniciar">Reiniciar</button>
+    </section>
+    
+    <section id="mensajes">
+        <!-- Aqui ira el texto creado con JS -->
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

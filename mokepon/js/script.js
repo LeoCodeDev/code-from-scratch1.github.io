@@ -25,6 +25,8 @@ const botonReiniciar        = document.getElementById('boton-reiniciar');
 const seccionAtaque         = document.getElementById('seleccionar-ataque')
 const seccionMensajes       = document.getElementById('mensajes')
 const seccionReiniciar      = document.getElementById('reiniciar')
+const contenedorSeleccion   = document.getElementById('contenedor-seleccion')
+const contenedorReiniciar   = document.getElementById('contenedor-reiniciar')
 
 
 
@@ -64,8 +66,9 @@ function seleccionarMascotaJugador(){
     mascotaJugador.innerHTML = seleccionado;
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
-        habilitarSecciones(seccionAtaque);
-        habilitarSecciones(seccionMensajes);
+        habilitarSecciones(contenedorSeleccion,'none');
+        habilitarSecciones(seccionAtaque,'block');
+        habilitarSecciones(seccionMensajes,'block');
     }
 }
 
@@ -147,11 +150,11 @@ function revisarVidas(){
     if(vidasEnemigo == 0){
         crearMensaje('p','mensajes',`Ganaste!!!, Tu ${seleccionado} es muy Fuerte.`)
         inhabilitarBotones();
-        habilitarSecciones(seccionReiniciar);
+        habilitarSecciones(seccionReiniciar,'block');
     }else if(vidasJugador == 0){
         crearMensaje('p','mensajes',`Perdiste!!!, Tu ${seleccionado} es muy Debil aun.`)
         inhabilitarBotones();
-        habilitarSecciones(seccionReiniciar);
+        habilitarSecciones(seccionReiniciar,'block');
     }else if(vidasEnemigo > 0 && vidasJugador > 0){
         crearMensaje('p','mensajes',`Tu mascota ataco con ${ataqueJugador}, la mascota del enemigo ataco con ${ataqueEnemigo} - ${resultadoCombate}`);
     }
@@ -163,6 +166,7 @@ function crearMensaje(elemento,identificador,textoHTML){
     mensajeCombate.appendChild(textoCombate);
     const SECCIONMENSAJE = document.getElementById(identificador);
     document.body.insertBefore(mensajeCombate, SECCIONMENSAJE);
+    /* document.body.contenedorReiniciar.insertBefore(mensajeCombate, SECCIONMENSAJE); */
 }
 
 function inhabilitarBotones(){
@@ -173,8 +177,8 @@ function inhabilitarBotones(){
 
 }
 
-function habilitarSecciones(elemento){
-    elemento.style.display = 'block';
+function habilitarSecciones(elemento,atributo){
+    elemento.style.display = atributo;
 }
 
 function reiniciarJuego(){
