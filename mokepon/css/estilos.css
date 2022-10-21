@@ -92,3 +92,33 @@ input:checked + label{
     cursor: pointer;
     background-color: #00ABB3;
 }
+
+#seleccionar-ataque {
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#seleccionar-ataque h2{
+    margin: 0px 0px 20px 0px;
+    color: #B2B2B2;
+}
+
+.contenedor-botones-ataque button{
+    font-family: 'Bubblegum Sans', cursive;
+    color: #00ABB3;
+    margin: 30px;
+    width: 150px;
+    height: 50px;
+    font-size: large;
+    border-radius: 25px;
+    border: 2px solid #00ABB3;
+    background-color: transparent;
+}
+
+.contenedor-botones-ataque button:hover{
+    color: #3C4048;
+    cursor: pointer;
+    background-color: #00ABB3;
+}

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
     <body>
+
         <section id="sleccionar-mascota" class="seleccionar-mokepones">
             <h1 id="titulo">Mokepon</h1>
             <div class="contenedor-seleccion" id="contenedor-seleccion">
@@ -45,32 +46,29 @@
                     </label>
                 </div>
                 <button id="boton-mascotas">Seleccionar</button>
-                
             </div>
         </section>
         
         <section id="seleccionar-ataque">
             <h2>Elige a tu ataque</h2>
-            <div>
+            <div class="contenedor-botones-ataque">
                 <button id="boton-fuego">Fuego 🔥</button>
                 <button id="boton-agua">Agua 💧</button>
                 <button id="boton-tierra">Tierra 🌱</button>
             </div>
-            <div>
+            <div class="contenedor-mensaje-combate">
                 <p>Tu <span id="mascota-jugador">Mascota</span> tiene <span id="vida-mascota-jugador">3</span> vidas</p>
                 <p>EL <span id="mascota-enemigo">Mascota</span> del enemigo tiene <span id="vida-mascota-enemigo">3</span> vidas</p>
             </div>
         </section>
-        <div>
-            <section id="reiniciar">
-                <button id="boton-reiniciar">Reiniciar</button>
-            </section>
-        </div>
-        <div>
-            <section id="mensajes">
-                <!-- Aqui ira el texto creado con JS -->
-            </section>
-        </div>
+
+        <section id="reiniciar" class="contenedor-boton-reiniciar">
+            <button id="boton-reiniciar">Reiniciar</button>
+        </section>
+
+        <section id="mensajes" class="mensajes-combate">
+            <!-- Aqui ira el texto creado con JS -->
+        </section>
 
         <script src="js/script.js"></script>
     </body>
