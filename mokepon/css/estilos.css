@@ -94,9 +94,8 @@ input:checked + label{
 }
 
 #seleccionar-ataque {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    grid-template-rows: 1fr;
+    justify-items: center;
 }
 
 #seleccionar-ataque h2{
@@ -275,5 +274,9 @@ input:checked + label{
 
     .contenedor-boton-reiniciar button{
         margin: 8px;
+    }
+
+    .contenedor-botones-ataque{
+        grid-row-start: 3;
     }
 }

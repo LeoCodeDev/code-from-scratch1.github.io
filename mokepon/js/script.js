@@ -75,7 +75,7 @@ function seleccionarMascotaJugador(){
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
-        habilitarSecciones(seccionAtaque,'flex');
+        habilitarSecciones(seccionAtaque,'grid');
         habilitarSecciones(seccionMensajes,'flex');
     }
 }
