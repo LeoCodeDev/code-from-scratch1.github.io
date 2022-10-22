@@ -116,6 +116,12 @@ input:checked + label{
     background-color: transparent;
 }
 
+.contenedor-botones-ataque button:hover{
+    color: #3C4048;
+    cursor: pointer;
+    background-color: #00ABB3;
+}
+
 .contenedor-mensaje-combate {
     display: flex;
     justify-content: space-between;
@@ -123,20 +129,36 @@ input:checked + label{
     gap: 40px;
 }
 
+.contenedor-mensaje-combate p:nth-child(1){
+    display: flex;
+    flex-direction: row;
+}
+
+.info-combate-jugador, .info-combate-enemigo{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-combate-jugador div, .info-combate-enemigo div{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.info-combate-jugador div > img, .info-combate-enemigo div > img{
+    width: 20px;
+    object-fit: contain;
+}
+
+.contenedor-mensaje-combate:nth-child(1n){
+    color: #B2B2B2;
+}
+
 .contenedor-mensaje-combate p{
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    padding: 25px;
-    margin: 10px;
-    color: #B2B2B2;
-}
-
-.contenedor-botones-ataque button:hover{
-    color: #3C4048;
-    cursor: pointer;
-    background-color: #00ABB3;
 }
 
 .contenedor-boton-reiniciar {
@@ -165,6 +187,11 @@ input:checked + label{
     flex-direction: column;
     align-items: center;
     color: #B2B2B2;
+}
+
+.versus img{
+    width: 90px;
+    object-fit: cover;
 }
 
 .FUEGO {

@@ -132,23 +132,20 @@ function combate(){
     }
 
     if(ataqueJugador == ataqueEnemigo){
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
-        tipoAtaqueJugador.innerHTML = ataqueJugador
         resultadoCombate  = 'Empate';
     }else if((ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO')||(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA')||(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA')){
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
-        tipoAtaqueJugador.innerHTML = ataqueJugador
         resultadoCombate  = 'GANASTE';
         vidasEnemigo--;
         vidaMascotaEnemigo.innerHTML = vidasEnemigo;
-        ti
     }else{
-        tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
-        tipoAtaqueJugador.innerHTML = ataqueJugador
         resultadoCombate = 'PERDISTE'
         vidasJugador--;
         vidaMascotaJugador.innerHTML = vidasJugador;
     }
+    tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
+    tipoAtaqueJugador.innerHTML = ataqueJugador
+    colocarAtributo(tipoAtaqueJugador,'class',ataqueJugador);
+    colocarAtributo(tipoAtaqueEnemigo,'class',ataqueEnemigo);
     revisarVidas()
     
 }
@@ -162,8 +159,6 @@ function revisarVidas(){
         crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado} es muy Debil aun.</p>`)
         inhabilitarBotones();
         habilitarSecciones(seccionReiniciar,'flex');
-    }else if(vidasEnemigo > 0 && vidasJugador > 0){
-        //crearMensaje(seccionMensajes,`<p>Tu mascota ataco con <span class="${ataqueJugador}">${ataqueJugador}</span>, la mascota del enemigo ataco con <span class="${ataqueEnemigo}">${ataqueEnemigo}</span> - <span class="${resultadoCombate}">${resultadoCombate}</span></p>`);
     }
 }
 
@@ -181,6 +176,10 @@ function inhabilitarBotones(){
 
 function habilitarSecciones(elemento,atributo){
     elemento.style.display = atributo;
+}
+
+function colocarAtributo(identificador,atributo,valorAtributo){
+    return identificador.setAttribute(atributo,valorAtributo);
 }
 
 function reiniciarJuego(){
