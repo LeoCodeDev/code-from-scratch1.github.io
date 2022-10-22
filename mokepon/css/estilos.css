@@ -135,8 +135,9 @@ input:checked + label{
 }
 
 .info-combate-jugador, .info-combate-enemigo{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 150px;
 }
 
 .info-combate-jugador div, .info-combate-enemigo div{
@@ -187,6 +188,12 @@ input:checked + label{
     flex-direction: column;
     align-items: center;
     color: #B2B2B2;
+}
+
+.versus {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    height: 150px;
 }
 
 .versus img{

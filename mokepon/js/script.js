@@ -27,7 +27,11 @@ const seccionMensajes       = document.getElementById('mensajes');
 const seccionReiniciar      = document.getElementById('reiniciar');
 const contenedorSeleccion   = document.getElementById('contenedor-seleccion');
 const contenedorReiniciar   = document.getElementById('contenedor-reiniciar');
-
+const resultadoTruno        = document.getElementById('resultado-turno');
+const nombreMokeponJugador  = document.getElementById('nombre-mokepon-seleccionado-jugador');
+const imgMokeponJugador     = document.getElementById('mokepon-seleccionado-jugador');
+const nombreMokeponEnemigo  = document.getElementById('nombre-mokepon-seleccionado-enemigo');
+const imgMokeponEnemigo     = document.getElementById('mokepon-seleccionado-enemigo');
 
 
 function iniciarJuego(){
@@ -63,7 +67,11 @@ function seleccionarMascotaJugador(){
     }else{
         alert('Por favor selecciona una mascota')
     }
+    let srcJugador = 'assets/' + seleccionado + '.png';
+    colocarAtributo(imgMokeponJugador,'src',srcJugador);
+    nombreMokeponJugador.innerHTML = seleccionado;
     mascotaJugador.innerHTML = seleccionado;
+    
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
@@ -101,6 +109,9 @@ function seleccionarMascotasEnemigo(){
     }
 
     mascotaEnemigo.innerHTML = mascotaEnemigoSeleccionada;
+    nombreMokeponEnemigo.innerHTML = mascotaEnemigoSeleccionada;
+    let srcEnemigo = 'assets/' + mascotaEnemigoSeleccionada + '.png';
+    colocarAtributo(imgMokeponEnemigo,'src',srcEnemigo);
     return seleccionEnemiga;
 }
 
@@ -138,14 +149,17 @@ function combate(){
         vidasEnemigo--;
         vidaMascotaEnemigo.innerHTML = vidasEnemigo;
     }else{
-        resultadoCombate = 'PERDISTE'
+        resultadoCombate = 'PERDISTE';
         vidasJugador--;
         vidaMascotaJugador.innerHTML = vidasJugador;
     }
-    tipoAtaqueEnemigo.innerHTML = ataqueEnemigo
-    tipoAtaqueJugador.innerHTML = ataqueJugador
+
+    tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
+    tipoAtaqueJugador.innerHTML = ataqueJugador;
+    resultadoTruno.innerHTML = resultadoCombate;
     colocarAtributo(tipoAtaqueJugador,'class',ataqueJugador);
     colocarAtributo(tipoAtaqueEnemigo,'class',ataqueEnemigo);
+    colocarAtributo(resultadoTruno,'class',resultadoCombate);
     revisarVidas()
     
 }
