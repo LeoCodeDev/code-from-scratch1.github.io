@@ -224,3 +224,56 @@ input:checked + label{
 .PERDISTE {
     color: #C3195D;
 }
+
+@media (max-width: 480px ){
+    .contenedor-botones-ataque button{
+        font-family: 'Bubblegum Sans', cursive;
+        color: #00ABB3;
+        margin: 2px;
+        width: 60px;
+        height: 60px;
+        font-size: medium;
+        border-radius: 35px;
+        border: 2px solid #00ABB3;
+        background-color: transparent;
+        margin-bottom: 15px;
+    }
+
+    .contenedor-mensaje-combate{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 5px;
+        justify-items: center;
+    }
+
+    .info-combate-jugador{
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    
+    .info-combate-enemigo{
+        grid-column-start: 3;
+        grid-row-start: 1;
+    }
+
+    .img-jugador{
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+    
+    .img-enemigo{
+        grid-column-start: 3;
+        grid-row-start: 2;
+    }
+
+    .versus{
+        grid-column-start: 2;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+
+    .contenedor-boton-reiniciar button{
+        margin: 8px;
+    }
+}
