@@ -1,4 +1,5 @@
 //Seccion de Declaracion de Variables y funciones
+let mokeponesArr = [];
 let ataqueJugador = '';
 let ataqueEnemigo = '';
 let resultadoCombate = '';
@@ -33,6 +34,56 @@ const imgMokeponJugador = document.getElementById('mokepon-seleccionado-jugador'
 const nombreMokeponEnemigo = document.getElementById('nombre-mokepon-seleccionado-enemigo');
 const imgMokeponEnemigo = document.getElementById('mokepon-seleccionado-enemigo');
 
+class Mokepon {
+    constructor(nombre,tipo,imagen,vida) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.imagen = imagen;
+        this.vida = vida;
+        this.ataque = [];
+    }
+}
+
+let capipepoObj = new Mokepon('Capipepo','agua','./assets/capipepo.png','3');
+let hipodogeObj = new Mokepon('Hipodoge','agua','./assets/hipodoge.png','3');
+let langostelvisObj = new Mokepon('Langostelvis','agua','./assets/langostelvis.png','3');
+let pydosObj = new Mokepon('Pydos','agua','./assets/pydos.png','3');
+let ratigueyaObj = new Mokepon('Ratigueya','agua','./assets/ratigueya.png','3');
+let tucapalmaObj = new Mokepon('Tucapalma','agua','./assets/tucapalma.png','3');
+
+mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
+
+class Ataques {
+    constructor(nombre,tipo,id,dmg){
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.id = id;
+        this.dmg = dmg;
+    }
+}
+
+let infernalAtk = new Ataques ('Fuego Infernal','🔥','boton-fuego',15);
+let llamaradaAtk = new Ataques ('Llamarada','🔥','boton-fuego',9);
+let vulcanoAtk = new Ataques ('Vulcano','🔥','boton-fuego',8);
+let luzBrillanteAtk = new Ataques ('Luz Brillante','🔥','boton-fuego',11);
+let hydrojetAtk = new Ataques ('Hydrojet','💧','boton-agua',23);
+let tsunamiAtk = new Ataques ('Tsunami','💧','boton-agua',4);
+let lluviaAtk = new Ataques ('Lluvia Torrencial','💧','boton-agua',9);
+let ruedaAtk = new Ataques ('Rueda de Agua','💧','boton-agua',7);
+let penonazolAtk = new Ataques ('Peñonazo','🌱','boton-tierra',1);
+let terremotoAtk = new Ataques ('Terremoto','🌱','boton-tierra',12);
+let pantanoAtk = new Ataques ('Pantano Peligroso','🌱','boton-tierra',6);
+let raicesAtk = new Ataques ('Raices Traicioneras','🌱','boton-tierra',2);
+let healingAtk = new Ataques ('Vigor','✨','boton-healing',12);
+
+capipepoObj.ataque.push(lluviaAtk,pantanoAtk,raicesAtk);
+hipodogeObj.ataque.push(hydrojetAtk,tsunamiAtk,ruedaAtk,healingAtk);
+langostelvisObj.ataque.push(terremotoAtk,penonazolAtk,raicesAtk,pantanoAtk);
+pydosObj.ataque.push(infernalAtk,llamaradaAtk,vulcanoAtk,terremotoAtk);
+ratigueyaObj.ataque.push(luzBrillanteAtk,vulcanoAtk,penonazolAtk);
+tucapalmaObj.ataque.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
+
+console.log(mokeponesArr);
 
 function iniciarJuego(){
     botonReiniciar.addEventListener('click', reiniciarJuego)
