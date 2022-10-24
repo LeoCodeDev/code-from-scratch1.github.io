@@ -6,14 +6,16 @@ let resultadoCombate = '';
 let vidasEnemigo = 3 ;
 let vidasJugador = 3 ;
 let seleccionado = '';
+let contenedorMokepones;
+let hipodoge;
+let capipepo;
+let ratigüeya;
+let langostelvis;
+let tucapalma;
+let pydos;
 const mascotaJugador = document.getElementById('mascota-jugador');
 const mascotaEnemigo = document.getElementById('mascota-enemigo');
-const hipodoge = document.getElementById('hipodoge');
-const capipepo = document.getElementById('capipepo');
-const ratigüeya = document.getElementById('ratigüeya');
-const langostelvis = document.getElementById('langostelvis');
-const tucapalma = document.getElementById('tucapalma');
-const pydos = document.getElementById('pydos');
+const tarjetasMokepones = document.querySelector('.tarjetas-mokepones');
 const tipoAtaqueJugador = document.getElementById('tipo-ataque-jugador');
 const tipoAtaqueEnemigo = document.getElementById('tipo-ataque-enemigo');
 const vidaMascotaJugador = document.getElementById('vida-mascota-jugador');
@@ -48,7 +50,7 @@ let capipepoObj = new Mokepon('Capipepo','agua','./assets/capipepo.png','3');
 let hipodogeObj = new Mokepon('Hipodoge','agua','./assets/hipodoge.png','3');
 let langostelvisObj = new Mokepon('Langostelvis','agua','./assets/langostelvis.png','3');
 let pydosObj = new Mokepon('Pydos','agua','./assets/pydos.png','3');
-let ratigueyaObj = new Mokepon('Ratigueya','agua','./assets/ratigueya.png','3');
+let ratigueyaObj = new Mokepon('Ratigüeya','agua','./assets/ratigüeya.png','3');
 let tucapalmaObj = new Mokepon('Tucapalma','agua','./assets/tucapalma.png','3');
 
 mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
@@ -86,6 +88,13 @@ tucapalmaObj.ataque.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
 console.log(mokeponesArr);
 
 function iniciarJuego(){
+    hipodoge = document.getElementById('Hipodoge');
+    capipepo = document.getElementById('Capipepo');
+    ratigüeya = document.getElementById('Ratigüeya');
+    langostelvis = document.getElementById('Langostelvis');
+    tucapalma = document.getElementById('Tucapalma');
+    pydos = document.getElementById('Pydos');
+    
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
     botonFuego.addEventListener('click', ataqueFuego);
@@ -94,6 +103,18 @@ function iniciarJuego(){
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
+
+    mokeponesArr.forEach((mokepon) => {
+        contenedorMokepones = `
+        <input type="radio" name="mascotas" id=${mokepon.nombre} class="radius-inputs">
+                    <label for=${mokepon.nombre} class="mokepones">
+                        <p>${mokepon.nombre}</p>
+                        <img src=${mokepon.imagen} alt=${mokepon.nombre}>
+                    </label>
+            `;
+            tarjetasMokepones.innerHTML += contenedorMokepones;
+
+    })
 }
 
 function random(min,max){
