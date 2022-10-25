@@ -46,12 +46,12 @@ class Mokepon {
     }
 }
 
-let capipepoObj = new Mokepon('Capipepo','agua','./assets/capipepo.png','3');
-let hipodogeObj = new Mokepon('Hipodoge','agua','./assets/hipodoge.png','3');
-let langostelvisObj = new Mokepon('Langostelvis','agua','./assets/langostelvis.png','3');
-let pydosObj = new Mokepon('Pydos','agua','./assets/pydos.png','3');
-let ratigueyaObj = new Mokepon('Ratigüeya','agua','./assets/ratigüeya.png','3');
-let tucapalmaObj = new Mokepon('Tucapalma','agua','./assets/tucapalma.png','3');
+let capipepoObj = new Mokepon('Capipepo','agua','./assets/Capipepo.png','3');
+let hipodogeObj = new Mokepon('Hipodoge','agua','./assets/Hipodoge.png','3');
+let langostelvisObj = new Mokepon('Langostelvis','agua','./assets/Langostelvis.png','3');
+let pydosObj = new Mokepon('Pydos','agua','./assets/Pydos.png','3');
+let ratigueyaObj = new Mokepon('Ratigüeya','agua','./assets/Ratigüeya.png','3');
+let tucapalmaObj = new Mokepon('Tucapalma','agua','./assets/Tucapalma.png','3');
 
 mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
 
@@ -88,6 +88,18 @@ tucapalmaObj.ataque.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
 console.log(mokeponesArr);
 
 function iniciarJuego(){
+    mokeponesArr.forEach((mokepon) => {
+        contenedorMokepones = `
+        <input type="radio" name="mascotas" id=${mokepon.nombre} class="radius-inputs">
+                    <label for=${mokepon.nombre} class="mokepones">
+                        <p>${mokepon.nombre}</p>
+                        <img src=${mokepon.imagen} alt=${mokepon.nombre}>
+                    </label>
+            `;
+            tarjetasMokepones.innerHTML += contenedorMokepones;
+
+    })
+
     hipodoge = document.getElementById('Hipodoge');
     capipepo = document.getElementById('Capipepo');
     ratigüeya = document.getElementById('Ratigüeya');
@@ -103,18 +115,6 @@ function iniciarJuego(){
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
-
-    mokeponesArr.forEach((mokepon) => {
-        contenedorMokepones = `
-        <input type="radio" name="mascotas" id=${mokepon.nombre} class="radius-inputs">
-                    <label for=${mokepon.nombre} class="mokepones">
-                        <p>${mokepon.nombre}</p>
-                        <img src=${mokepon.imagen} alt=${mokepon.nombre}>
-                    </label>
-            `;
-            tarjetasMokepones.innerHTML += contenedorMokepones;
-
-    })
 }
 
 function random(min,max){
