@@ -1,5 +1,6 @@
 //Seccion de Declaracion de Variables y funciones
 let mokeponesArr = [];
+let elementosMoke = [];
 let ataqueJugador = '';
 let ataqueEnemigo = '';
 let resultadoCombate = '';
@@ -7,9 +8,10 @@ let vidasEnemigo = 3 ;
 let vidasJugador = 3 ;
 let seleccionado = '';
 let contenedorMokepones;
-let hipodoge;
+let contenedorElegido;
 let capipepo;
-let ratigüeya;
+let hipodoge;
+let ratigueya;
 let langostelvis;
 let tucapalma;
 let pydos;
@@ -31,14 +33,14 @@ const seccionReiniciar = document.getElementById('reiniciar');
 const contenedorSeleccion = document.getElementById('contenedor-seleccion');
 const contenedorReiniciar = document.getElementById('contenedor-reiniciar');
 const resultadoTruno = document.getElementById('resultado-turno');
-const nombreMokeponJugador = document.getElementById('nombre-mokepon-seleccionado-jugador');
-const imgMokeponJugador = document.getElementById('mokepon-seleccionado-jugador');
 const nombreMokeponEnemigo = document.getElementById('nombre-mokepon-seleccionado-enemigo');
 const imgMokeponEnemigo = document.getElementById('mokepon-seleccionado-enemigo');
+const imgJugador = document.querySelector('.img-jugador');
 
 class Mokepon {
-    constructor(nombre,tipo,imagen,vida) {
+    constructor(nombre,id,tipo,imagen,vida) {
         this.nombre = nombre;
+        this.id = id;
         this.tipo = tipo;
         this.imagen = imagen;
         this.vida = vida;
@@ -46,12 +48,12 @@ class Mokepon {
     }
 }
 
-let capipepoObj = new Mokepon('Capipepo','agua','./assets/Capipepo.png','3');
-let hipodogeObj = new Mokepon('Hipodoge','agua','./assets/Hipodoge.png','3');
-let langostelvisObj = new Mokepon('Langostelvis','agua','./assets/Langostelvis.png','3');
-let pydosObj = new Mokepon('Pydos','agua','./assets/Pydos.png','3');
-let ratigueyaObj = new Mokepon('Ratigüeya','agua','./assets/Ratigüeya.png','3');
-let tucapalmaObj = new Mokepon('Tucapalma','agua','./assets/Tucapalma.png','3');
+let capipepoObj = new Mokepon('Capipepo','capipepo','agua','./assets/capipepo.png','3');
+let hipodogeObj = new Mokepon('Hipodoge','hipodoge','agua','./assets/hipodoge.png','3');
+let langostelvisObj = new Mokepon('Langostelvis','langostelvis','agua','./assets/langostelvis.png','3');
+let pydosObj = new Mokepon('Pydos','pydos','agua','./assets/pydos.png','3');
+let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','agua','./assets/ratigueya.png','3');
+let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','agua','./assets/tucapalma.png','3');
 
 mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
 
@@ -90,8 +92,8 @@ console.log(mokeponesArr);
 function iniciarJuego(){
     mokeponesArr.forEach((mokepon) => {
         contenedorMokepones = `
-        <input type="radio" name="mascotas" id=${mokepon.nombre} class="radius-inputs">
-                    <label for=${mokepon.nombre} class="mokepones">
+        <input type="radio" name="mascotas" id=${mokepon.id} class="radius-inputs">
+                    <label for=${mokepon.id} class="mokepones">
                         <p>${mokepon.nombre}</p>
                         <img src=${mokepon.imagen} alt=${mokepon.nombre}>
                     </label>
@@ -100,12 +102,14 @@ function iniciarJuego(){
 
     })
 
-    hipodoge = document.getElementById('Hipodoge');
-    capipepo = document.getElementById('Capipepo');
-    ratigüeya = document.getElementById('Ratigüeya');
-    langostelvis = document.getElementById('Langostelvis');
-    tucapalma = document.getElementById('Tucapalma');
-    pydos = document.getElementById('Pydos');
+    capipepo = document.getElementById('capipepo');
+    hipodoge = document.getElementById('hipodoge');
+    ratigueya = document.getElementById('ratigueya');
+    langostelvis = document.getElementById('langostelvis');
+    tucapalma = document.getElementById('tucapalma');
+    pydos = document.getElementById('pydos');
+
+    elementosMoke.push(capipepo,hipodoge,langostelvis,pydos,ratigueya,tucapalma);
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
@@ -122,28 +126,29 @@ function random(min,max){
     return random
 }
 
+
+
 function seleccionarMascotaJugador(){
-    
-    if(hipodoge.checked){
-        seleccionado = hipodoge.id;
-    }else if(capipepo.checked){
-        seleccionado = capipepo.id;
-    }else if(ratigüeya.checked){
-        seleccionado = ratigüeya.id;
-    }else if(langostelvis.checked){
-        seleccionado = langostelvis.id;
-    }else if(tucapalma.checked){
-        seleccionado = tucapalma.id;
-    }else if(pydos.checked){
-        seleccionado = pydos.id;
-    }else{
-        alert('Por favor selecciona una mascota')
+
+    for(i = 0; i < elementosMoke.length; i++){
+        let prueba1 = elementosMoke[i];
+        if(prueba1.checked){
+            console.log('funciona')
+            seleccionado = prueba1.id;
+            contenedorElegido = `
+            <label for=${seleccionado} class="mokepones">
+                <p>${mokeponesArr[i].nombre}</p>
+                <img src=${mokeponesArr[i].imagen} alt=${seleccionado}>
+            </label>
+            `
+            imgJugador.innerHTML = contenedorElegido;
+            mascotaJugador.innerHTML = mokeponesArr[i].nombre;
+        }
     }
-    let srcJugador = 'assets/' + seleccionado + '.png';
-    colocarAtributo(imgMokeponJugador,'src',srcJugador);
-    nombreMokeponJugador.innerHTML = seleccionado;
-    mascotaJugador.innerHTML = seleccionado;
-    
+    if(seleccionado == ''){
+    alert('Por favor selecciona una mascota');
+    }
+
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
@@ -165,7 +170,7 @@ function seleccionarMascotasEnemigo(){
             mascotaEnemigoSeleccionada = capipepo.id;
             break;
         case 3:
-            mascotaEnemigoSeleccionada = ratigüeya.id;
+            mascotaEnemigoSeleccionada = ratigueya.id;
             break;
         case 4:
             mascotaEnemigoSeleccionada = langostelvis.id;
