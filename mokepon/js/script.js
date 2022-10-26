@@ -127,7 +127,6 @@ function random(min,max){
 }
 
 function seleccionarMascotaJugador(){
-
     for(i = 0; i < elementosMoke.length; i++){
         let prueba1 = elementosMoke[i];
         if(prueba1.checked){
@@ -155,22 +154,20 @@ function seleccionarMascotaJugador(){
 }
 
 function seleccionarMascotasEnemigo(){
-    let seleccionEnemiga = random(0,5);
+    let seleccionEnemiga = random(0,mokeponesArr.length -1);
     let mascotaEnemigoSeleccionada = '';
+    
+    mascotaEnemigoSeleccionada = elementosMoke[seleccionEnemiga].id;
+    contenedorElegidoEnemigo = `
+        <label for=${mascotaEnemigoSeleccionada}" class="mokepones">
+            <p>${mokeponesArr[seleccionEnemiga].nombre}</p>
+            <img src=${mokeponesArr[seleccionEnemiga].imagen} alt=${mascotaEnemigoSeleccionada}>
+        </label>
+    `
+    imgEnemigo.innerHTML = contenedorElegidoEnemigo;
+    mascotaEnemigo.innerHTML = mokeponesArr[seleccionEnemiga].nombre;
 
-    for(i = 0; i <= seleccionEnemiga; i++){
-        if(i == seleccionEnemiga){
-            mascotaEnemigoSeleccionada = elementosMoke[i].id;
-            contenedorElegidoEnemigo = `
-                <label for=${mascotaEnemigoSeleccionada}" class="mokepones">
-                    <p>${mokeponesArr[i].nombre}</p>
-                    <img src=${mokeponesArr[i].imagen} alt=${mascotaEnemigoSeleccionada}>
-                </label>
-            `
-            imgEnemigo.innerHTML = contenedorElegidoEnemigo;
-            mascotaEnemigo.innerHTML = mokeponesArr[i].nombre;
-        }
-    }
+
 }
 
 function ataqueFuego(){
