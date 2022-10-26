@@ -8,7 +8,8 @@ let vidasEnemigo = 3 ;
 let vidasJugador = 3 ;
 let seleccionado = '';
 let contenedorMokepones;
-let contenedorElegido;
+let contenedorElegidoJugador;
+let contenedorElegidoEnemigo;
 let capipepo;
 let hipodoge;
 let ratigueya;
@@ -36,6 +37,7 @@ const resultadoTruno = document.getElementById('resultado-turno');
 const nombreMokeponEnemigo = document.getElementById('nombre-mokepon-seleccionado-enemigo');
 const imgMokeponEnemigo = document.getElementById('mokepon-seleccionado-enemigo');
 const imgJugador = document.querySelector('.img-jugador');
+const imgEnemigo = document.querySelector('.img-enemigo');
 
 class Mokepon {
     constructor(nombre,id,tipo,imagen,vida) {
@@ -87,8 +89,6 @@ pydosObj.ataque.push(infernalAtk,llamaradaAtk,vulcanoAtk,terremotoAtk);
 ratigueyaObj.ataque.push(luzBrillanteAtk,vulcanoAtk,penonazolAtk);
 tucapalmaObj.ataque.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
 
-console.log(mokeponesArr);
-
 function iniciarJuego(){
     mokeponesArr.forEach((mokepon) => {
         contenedorMokepones = `
@@ -126,22 +126,19 @@ function random(min,max){
     return random
 }
 
-
-
 function seleccionarMascotaJugador(){
 
     for(i = 0; i < elementosMoke.length; i++){
         let prueba1 = elementosMoke[i];
         if(prueba1.checked){
-            console.log('funciona')
             seleccionado = prueba1.id;
-            contenedorElegido = `
+            contenedorElegidoJugador = `
             <label for=${seleccionado} class="mokepones">
                 <p>${mokeponesArr[i].nombre}</p>
                 <img src=${mokeponesArr[i].imagen} alt=${seleccionado}>
             </label>
             `
-            imgJugador.innerHTML = contenedorElegido;
+            imgJugador.innerHTML = contenedorElegidoJugador;
             mascotaJugador.innerHTML = mokeponesArr[i].nombre;
         }
     }
@@ -158,38 +155,22 @@ function seleccionarMascotaJugador(){
 }
 
 function seleccionarMascotasEnemigo(){
-    let seleccionEnemiga = random(1,6);
-    
+    let seleccionEnemiga = random(0,5);
     let mascotaEnemigoSeleccionada = '';
 
-    switch(seleccionEnemiga){
-        case 1:
-            mascotaEnemigoSeleccionada = hipodoge.id;
-            break;
-        case 2:
-            mascotaEnemigoSeleccionada = capipepo.id;
-            break;
-        case 3:
-            mascotaEnemigoSeleccionada = ratigueya.id;
-            break;
-        case 4:
-            mascotaEnemigoSeleccionada = langostelvis.id;
-            break;
-        case 5:
-            mascotaEnemigoSeleccionada = tucapalma.id;
-            break;
-        case 6:
-            mascotaEnemigoSeleccionada = pydos.id;
-            break;
-        default:
-            mascotaEnemigoSeleccionada = 'Nadie'
+    for(i = 0; i <= seleccionEnemiga; i++){
+        if(i == seleccionEnemiga){
+            mascotaEnemigoSeleccionada = elementosMoke[i].id;
+            contenedorElegidoEnemigo = `
+                <label for=${mascotaEnemigoSeleccionada}" class="mokepones">
+                    <p>${mokeponesArr[i].nombre}</p>
+                    <img src=${mokeponesArr[i].imagen} alt=${mascotaEnemigoSeleccionada}>
+                </label>
+            `
+            imgEnemigo.innerHTML = contenedorElegidoEnemigo;
+            mascotaEnemigo.innerHTML = mokeponesArr[i].nombre;
+        }
     }
-
-    mascotaEnemigo.innerHTML = mascotaEnemigoSeleccionada;
-    nombreMokeponEnemigo.innerHTML = mascotaEnemigoSeleccionada;
-    let srcEnemigo = 'assets/' + mascotaEnemigoSeleccionada + '.png';
-    colocarAtributo(imgMokeponEnemigo,'src',srcEnemigo);
-    return seleccionEnemiga;
 }
 
 function ataqueFuego(){
