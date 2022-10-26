@@ -10,6 +10,7 @@ let seleccionado = '';
 let contenedorMokepones;
 let contenedorElegidoJugador;
 let contenedorElegidoEnemigo;
+let ataquesMokepon;
 let capipepo;
 let hipodoge;
 let ratigueya;
@@ -38,6 +39,7 @@ const nombreMokeponEnemigo = document.getElementById('nombre-mokepon-seleccionad
 const imgMokeponEnemigo = document.getElementById('mokepon-seleccionado-enemigo');
 const imgJugador = document.querySelector('.img-jugador');
 const imgEnemigo = document.querySelector('.img-enemigo');
+const contenedorBotonesAtaques = document.querySelector('.contenedor-botones-ataque');
 
 class Mokepon {
     constructor(nombre,id,tipo,imagen,vida) {
@@ -68,7 +70,7 @@ class Ataques {
     }
 }
 
-let infernalAtk = new Ataques ('Fuego Infernal','🔥','boton-fuego',15);
+let infernalAtk = new Ataques ('Fuego Infernal','🔥','infernal',15);
 let llamaradaAtk = new Ataques ('Llamarada','🔥','boton-fuego',9);
 let vulcanoAtk = new Ataques ('Vulcano','🔥','boton-fuego',8);
 let luzBrillanteAtk = new Ataques ('Luz Brillante','🔥','boton-fuego',11);
@@ -90,12 +92,12 @@ ratigueyaObj.ataque.push(luzBrillanteAtk,vulcanoAtk,penonazolAtk);
 tucapalmaObj.ataque.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
 
 function iniciarJuego(){
-    mokeponesArr.forEach((mokepon) => {
+    mokeponesArr.forEach((mok) => {
         contenedorMokepones = `
-        <input type="radio" name="mascotas" id=${mokepon.id} class="radius-inputs">
-                    <label for=${mokepon.id} class="mokepones">
-                        <p>${mokepon.nombre}</p>
-                        <img src=${mokepon.imagen} alt=${mokepon.nombre}>
+        <input type="radio" name="mascotas" id=${mok.id} class="radius-inputs">
+                    <label for=${mok.id} class="mokepones">
+                        <p>${mok.nombre}</p>
+                        <img src=${mok.imagen} alt=${mok.nombre}>
                     </label>
             `;
             tarjetasMokepones.innerHTML += contenedorMokepones;
@@ -113,9 +115,9 @@ function iniciarJuego(){
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
-    botonFuego.addEventListener('click', ataqueFuego);
+    /* botonFuego.addEventListener('click', ataqueFuego);
     botonAgua.addEventListener('click', ataqueAgua);
-    botonTierra.addEventListener('click', ataqueTierra);
+    botonTierra.addEventListener('click', ataqueTierra); */
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
@@ -128,29 +130,28 @@ function random(min,max){
 
 function seleccionarMascotaJugador(){
     for(i = 0; i < elementosMoke.length; i++){
-        let prueba1 = elementosMoke[i];
-        if(prueba1.checked){
-            seleccionado = prueba1.id;
+        if(elementosMoke[i].checked){
             contenedorElegidoJugador = `
-            <label for=${seleccionado} class="mokepones">
+            <label for=${mokeponesArr[i].id} class="mokepones">
                 <p>${mokeponesArr[i].nombre}</p>
                 <img src=${mokeponesArr[i].imagen} alt=${seleccionado}>
             </label>
             `
             imgJugador.innerHTML = contenedorElegidoJugador;
             mascotaJugador.innerHTML = mokeponesArr[i].nombre;
+            seleccionado = mokeponesArr[i];
         }
     }
     if(seleccionado == ''){
     alert('Por favor selecciona una mascota');
     }
-
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
         habilitarSecciones(seccionAtaque,'grid');
         habilitarSecciones(seccionMensajes,'flex');
     }
+    botonesDeAtaque();
 }
 
 function seleccionarMascotasEnemigo(){
@@ -166,8 +167,17 @@ function seleccionarMascotasEnemigo(){
     `
     imgEnemigo.innerHTML = contenedorElegidoEnemigo;
     mascotaEnemigo.innerHTML = mokeponesArr[seleccionEnemiga].nombre;
+}
 
-
+function botonesDeAtaque(){
+    ataquesMokepon = seleccionado.ataque;
+    console.log(ataquesMokepon);
+    for(i = 0; 0 < ataquesMokepon.length; i++){
+        console.log(ataquesMokepon[i])
+        contenedorBotonesAtaques.innerHTML += `
+        <button>${ataquesMokepon[i].nombre}</button>
+        `
+    }
 }
 
 function ataqueFuego(){
