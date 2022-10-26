@@ -50,7 +50,7 @@ class Mokepon {
     }
 }
 
-let capipepoObj = new Mokepon('Capipepo','capipepo','agua','./assets/capipepo.png','3');
+let capipepoObj = new Mokepon('Capipepo','capipepo','agua','./assets/capipepo.png','120');
 let hipodogeObj = new Mokepon('Hipodoge','hipodoge','agua','./assets/hipodoge.png','3');
 let langostelvisObj = new Mokepon('Langostelvis','langostelvis','agua','./assets/langostelvis.png','3');
 let pydosObj = new Mokepon('Pydos','pydos','agua','./assets/pydos.png','3');
