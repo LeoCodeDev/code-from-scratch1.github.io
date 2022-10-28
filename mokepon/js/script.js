@@ -2,6 +2,7 @@
 let mokeponesArr = [];
 let elementosMoke = [];
 let ataques = [];
+let ataquesEnemigo = [];
 let ataqueJugador = '';
 let ataqueEnemigo = '';
 let resultadoCombate = '';
@@ -9,6 +10,8 @@ let vidasEnemigo = 3 ;
 let vidasJugador = 10 ;
 let seleccionado = '';
 let enemigo = '';
+let hitJugador;
+let hitEnemigo;
 let contenedorMokepones;
 let contenedorElegidoJugador;
 let contenedorElegidoEnemigo;
@@ -61,12 +64,12 @@ class Ataques {
     }
 }
 
-let capipepoObj = new Mokepon('Capipepo','capipepo','agua','./assets/capipepo.png','120');
-let hipodogeObj = new Mokepon('Hipodoge','hipodoge','agua','./assets/hipodoge.png','3');
-let langostelvisObj = new Mokepon('Langostelvis','langostelvis','agua','./assets/langostelvis.png','3');
-let pydosObj = new Mokepon('Pydos','pydos','agua','./assets/pydos.png','3');
-let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','agua','./assets/ratigueya.png','3');
-let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','agua','./assets/tucapalma.png','3');
+let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png','120');
+let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png','120');
+let langostelvisObj = new Mokepon('Langostelvis','langostelvis','💧','./assets/langostelvis.png','120');
+let pydosObj = new Mokepon('Pydos','pydos','🔥','./assets/pydos.png','120');
+let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png','120');
+let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png','120');
 
 let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
 let llamaradaAtk = new Ataques ('Llamarada','🔥','llamarada',3);
@@ -146,21 +149,14 @@ function seleccionarMascotaJugador(){
     if(seleccionado == ''){
     alert('Por favor selecciona una mascota');
     }
-    extraerAtaques(seleccionado);
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
         habilitarSecciones(seccionAtaque,'grid');
         habilitarSecciones(seccionMensajes,'flex');
     }
-}
-
-function extraerAtaques(seleccionado){
-    for (let i = 0; i < mokeponesArr.length; i++) {
-        if (seleccionado === mokeponesArr[i]) {
-            ataques = mokeponesArr[i].ataques
-        }
-    }
+    ataques = seleccionado.ataques
+    ataquesEnemigo = enemigo.ataques
     botonesDeAtaque(ataques);
 }
 
@@ -180,18 +176,12 @@ function activadorAtaques(arrs){
     arrs.forEach((arr)=>{
         if(arr.classList[0] == '💧'){
             arr.addEventListener('click', atack)
-            console.log('💧')
         }else if (arr.classList[0] == '🌱') {
             arr.addEventListener('click', atack)
-            console.log('🌱')
-            
         } else if (arr.classList[0] == '🔥') {
             arr.addEventListener('click', atack)
-            console.log('🔥')
-            
         } else if (arr.classList[0] == '✨') {
             arr.addEventListener('click', atack)
-            console.log('✨') 
         }
     })
 }
@@ -213,30 +203,42 @@ function seleccionarMascotasEnemigo(){
 }
 
 function atack(i){
-    let ordenJugador = i.target.id
+    let ordenJugador = i.target;
     ataques.forEach(ataque => {
-        if(ataque.id === ordenJugador){
+        if(ataque.id === ordenJugador.id){
             hitJugador = ataque.dmg*random2(random(0,3),random(4,6))
         }
     })
-    return hitJugador
+    let ordenEnemigo = ataquesEnemigo[random(0, ataquesEnemigo.length -1)];
+    ataquesEnemigo.forEach(ataqueE => {
+        if (ataqueE.id === ordenEnemigo.id) {
+            hitEnemigo = ataqueE.dmg*random2(random(0,3),random(4,6))
+        }
+    });
+    combate(ordenJugador.classList[0],ordenEnemigo.tipo)
 }
 
-function combate(){
-    let seleccionAtaqueEnemigo = random(1,3);
-    switch(seleccionAtaqueEnemigo){
-        case 1:
-            ataqueEnemigo = 'FUEGO';
-            break;
-        case 2:
-            ataqueEnemigo = 'AGUA';
-            break;
-        case 3:
-            ataqueEnemigo = 'TIERRA';
-            break;
+function combate(tipoAtkJugador, tipoAtkEnemigo){
+    if (tipoAtkJugador === '✨' && tipoAtkEnemigo === '✨') {
+        console.log('ambos se curan')
+    } else if(tipoAtkJugador === '✨' && tipoAtkEnemigo != '✨'){
+        console.log('Jugador se cura')
+    } else if(tipoAtkJugador != '✨' && tipoAtkEnemigo === '✨'){
+        console.log('Enemigo se cura')
+    } else if ((tipoAtkJugador === '💧' && enemigo.tipo === '🔥') || (tipoAtkJugador === '🔥' && enemigo.tipo === '🌱') || (tipoAtkJugador === '🌱' && enemigo.tipo === '💧')) {
+        console.log('Multiplicador ataque jugador y divisor ataque Enemigo')
+    } else if((tipoAtkEnemigo === '💧' && seleccionado.tipo === '🔥') || (tipoAtkEnemigo === '🔥' && seleccionado.tipo === '🌱') || (tipoAtkEnemigo === '🌱' && seleccionado.tipo === '💧')){
+        console.log('Multiplicador ataque enemigo y divisor ataque jugador')
+    }else{
+        console.log('ataque base')
     }
-
-    if(ataqueJugador == ataqueEnemigo){
+    console.log([
+        `Tipo Mokepon Jugador: ${seleccionado.tipo}`,
+        `Tipo Ataque Jugador: ${tipoAtkJugador}`,
+        `Tipo Mokepon Enemigo: ${enemigo.tipo}`,
+        `Tipo Ataque Enemigo: ${tipoAtkEnemigo}`
+    ])
+    /* if(ataqueJugador == ataqueEnemigo){
         resultadoCombate  = 'Empate';
     }else if((ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO')||(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA')||(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA')){
         resultadoCombate  = 'GANASTE';
@@ -251,7 +253,7 @@ function combate(){
     tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
     tipoAtaqueJugador.innerHTML = ataqueJugador;
     resultadoTruno.innerHTML = resultadoCombate;
-    revisarVidas()
+    revisarVidas() */
     
 }
 
