@@ -155,6 +155,7 @@ function seleccionarMascotaJugador(){
         habilitarSecciones(seccionAtaque,'grid');
         habilitarSecciones(seccionMensajes,'flex');
     }
+    vidasJugador = seleccionado.vida
     ataques = seleccionado.ataques
     ataquesEnemigo = enemigo.ataques
     botonesDeAtaque(ataques);
@@ -199,6 +200,7 @@ function seleccionarMascotasEnemigo(){
     `
     imgEnemigo.innerHTML = contenedorElegidoEnemigo;
     mascotaEnemigo.innerHTML = mokeponesArr[seleccionEnemiga].nombre;
+    vidasEnemigo = enemigo.vida
     return enemigo
 }
 
@@ -207,62 +209,81 @@ function atack(i){
     ataques.forEach(ataque => {
         if(ataque.id === ordenJugador.id){
             hitJugador = ataque.dmg*random2(random(0,3),random(4,6))
+            ataqueJugador = ordenJugador.textContent
         }
     })
     let ordenEnemigo = ataquesEnemigo[random(0, ataquesEnemigo.length -1)];
     ataquesEnemigo.forEach(ataqueE => {
         if (ataqueE.id === ordenEnemigo.id) {
             hitEnemigo = ataqueE.dmg*random2(random(0,3),random(4,6))
+            ataqueEnemigo = `${ataqueE.nombre} ${ataqueE.tipo}`;
         }
     });
-    combate(ordenJugador.classList[0],ordenEnemigo.tipo)
+    combate(ordenJugador.classList[0],ordenEnemigo.tipo,hitJugador,hitEnemigo)
 }
 
-function combate(tipoAtkJugador, tipoAtkEnemigo){
-    if (tipoAtkJugador === '✨' && tipoAtkEnemigo === '✨') {
-        console.log('ambos se curan')
-    } else if(tipoAtkJugador === '✨' && tipoAtkEnemigo != '✨'){
-        console.log('Jugador se cura')
-    } else if(tipoAtkJugador != '✨' && tipoAtkEnemigo === '✨'){
-        console.log('Enemigo se cura')
-    } else if ((tipoAtkJugador === '💧' && enemigo.tipo === '🔥') || (tipoAtkJugador === '🔥' && enemigo.tipo === '🌱') || (tipoAtkJugador === '🌱' && enemigo.tipo === '💧')) {
-        console.log('Multiplicador ataque jugador y divisor ataque Enemigo')
-    } else if((tipoAtkEnemigo === '💧' && seleccionado.tipo === '🔥') || (tipoAtkEnemigo === '🔥' && seleccionado.tipo === '🌱') || (tipoAtkEnemigo === '🌱' && seleccionado.tipo === '💧')){
-        console.log('Multiplicador ataque enemigo y divisor ataque jugador')
+function healing(vidastotales,vidasRestantes,valor){
+    if(vidasRestantes == vidastotales){
+        vidasRestantes += valor * 0;
+    }else if((vidasRestantes + valor) <= vidastotales){
+        vidasRestantes += Math.floor(valor)
     }else{
-        console.log('ataque base')
+        vidasRestantes += Math.floor(vidastotales - vidasRestantes);
     }
-    console.log([
-        `Tipo Mokepon Jugador: ${seleccionado.tipo}`,
-        `Tipo Ataque Jugador: ${tipoAtkJugador}`,
-        `Tipo Mokepon Enemigo: ${enemigo.tipo}`,
-        `Tipo Ataque Enemigo: ${tipoAtkEnemigo}`
-    ])
-    /* if(ataqueJugador == ataqueEnemigo){
-        resultadoCombate  = 'Empate';
-    }else if((ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO')||(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA')||(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA')){
-        resultadoCombate  = 'GANASTE';
-        vidasEnemigo--;
-        vidaMascotaEnemigo.innerHTML = vidasEnemigo;
-    }else{
-        resultadoCombate = 'PERDISTE';
-        vidasJugador--;
-        vidaMascotaJugador.innerHTML = vidasJugador;
-    }
+    return vidasRestantes
+}
 
+function damageUp(tipoAtk,tipoMoke,hit,vidas){
+    if(tipoAtk === tipoMoke){
+        vidas -= Math.floor(hit * 1.6)
+    }else{
+        vidas -= Math.floor(hit * 1.3)
+    }
+    return vidas
+}
+
+function damageDw(tipoAtk,tipoMoke,hit,vidas){
+    if(tipoAtk === tipoMoke){
+        vidas -= Math.floor(hit * 0.5)
+    }else{
+        vidas -= Math.floor(hit * 0.8)
+    }
+    return vidas
+}
+
+function combate(tipoAtkJugador, tipoAtkEnemigo, hitJugador, hitEnemigo){
+    if (tipoAtkJugador === '✨' && tipoAtkEnemigo === '✨') {
+        vidasJugador = healing(seleccionado.vida,vidasJugador,hitJugador);
+        vidasEnemigo = healing(enemigo.vida,vidasEnemigo,hitEnemigo)
+    } else if(tipoAtkJugador === '✨' && tipoAtkEnemigo != '✨'){
+        vidasJugador = healing(seleccionado.vida,vidasJugador,hitJugador)
+    } else if(tipoAtkJugador != '✨' && tipoAtkEnemigo === '✨'){
+        vidasEnemigo = healing(enemigo.vida,vidasEnemigo,hitEnemigo)
+    } else if ((tipoAtkJugador === '💧' && enemigo.tipo === '🔥') || (tipoAtkJugador === '🔥' && enemigo.tipo === '🌱') || (tipoAtkJugador === '🌱' && enemigo.tipo === '💧')) {
+        vidasEnemigo = damageUp(tipoAtkJugador,seleccionado.tipo,hitJugador,vidasEnemigo)
+        vidasJugador = damageDw(tipoAtkEnemigo,enemigo.tipo,hitEnemigo,vidasJugador)
+    } else if((tipoAtkEnemigo === '💧' && seleccionado.tipo === '🔥') || (tipoAtkEnemigo === '🔥' && seleccionado.tipo === '🌱') || (tipoAtkEnemigo === '🌱' && seleccionado.tipo === '💧')){
+        vidasEnemigo = damageDw(tipoAtkJugador,seleccionado.tipo,hitJugador,vidasEnemigo)
+        vidasJugador = damageUp(tipoAtkEnemigo,enemigo.tipo,hitEnemigo,vidasJugador)
+    }else{
+        vidasEnemigo -= Math.floor(hitJugador)
+        vidasJugador -= Math.floor(hitEnemigo)
+    }
     tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
     tipoAtaqueJugador.innerHTML = ataqueJugador;
-    resultadoTruno.innerHTML = resultadoCombate;
-    revisarVidas() */
-    
+    vidaMascotaJugador.innerHTML = vidasJugador;
+    vidaMascotaEnemigo.innerHTML = vidasEnemigo;
+    revisarVidas();    
 }
 
 function revisarVidas(){
-    if(vidasEnemigo == 0){
+    if(vidasEnemigo <= 0){
+        vidaMascotaEnemigo.innerHTML = 0
         crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
         inhabilitarBotones();
-    }else if(vidasJugador == 0){
+    }else if(vidasJugador <= 0){
+        vidaMascotaJugador.innerHTM = 0
         crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado.nombre} es muy Debil aun.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
         inhabilitarBotones();
