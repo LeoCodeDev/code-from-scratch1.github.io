@@ -8,6 +8,7 @@ let resultadoCombate = '';
 let vidasEnemigo = 3 ;
 let vidasJugador = 10 ;
 let seleccionado = '';
+let enemigo = '';
 let contenedorMokepones;
 let contenedorElegidoJugador;
 let contenedorElegidoEnemigo;
@@ -155,7 +156,6 @@ function seleccionarMascotaJugador(){
 }
 
 function extraerAtaques(seleccionado){
-    ataques
     for (let i = 0; i < mokeponesArr.length; i++) {
         if (seleccionado === mokeponesArr[i]) {
             ataques = mokeponesArr[i].ataques
@@ -199,7 +199,7 @@ function activadorAtaques(arrs){
 function seleccionarMascotasEnemigo(){
     let seleccionEnemiga = random(0,mokeponesArr.length -1);
     let mascotaEnemigoSeleccionada = '';
-    
+    enemigo = mokeponesArr[seleccionEnemiga];
     mascotaEnemigoSeleccionada = elementosMoke[seleccionEnemiga].id;
     contenedorElegidoEnemigo = `
         <label for=${mascotaEnemigoSeleccionada}" class="mokepones">
@@ -209,6 +209,7 @@ function seleccionarMascotasEnemigo(){
     `
     imgEnemigo.innerHTML = contenedorElegidoEnemigo;
     mascotaEnemigo.innerHTML = mokeponesArr[seleccionEnemiga].nombre;
+    return enemigo
 }
 
 function atack(i){
