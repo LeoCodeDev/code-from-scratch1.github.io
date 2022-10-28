@@ -1,16 +1,18 @@
 //Seccion de Declaracion de Variables y funciones
 let mokeponesArr = [];
 let elementosMoke = [];
+let ataques = [];
 let ataqueJugador = '';
 let ataqueEnemigo = '';
 let resultadoCombate = '';
 let vidasEnemigo = 3 ;
-let vidasJugador = 3 ;
+let vidasJugador = 10 ;
 let seleccionado = '';
 let contenedorMokepones;
 let contenedorElegidoJugador;
 let contenedorElegidoEnemigo;
-let ataquesMokepon;
+let valorClick;
+let tipoAtaque;
 let capipepo;
 let hipodoge;
 let ratigueya;
@@ -25,9 +27,6 @@ const tipoAtaqueEnemigo = document.getElementById('tipo-ataque-enemigo');
 const vidaMascotaJugador = document.getElementById('vida-mascota-jugador');
 const vidaMascotaEnemigo = document.getElementById('vida-mascota-enemigo');
 const botonMascota = document.getElementById('boton-mascotas');
-const botonFuego = document.getElementById('boton-fuego');
-const botonAgua = document.getElementById('boton-agua');
-const botonTierra = document.getElementById('boton-tierra');
 const botonReiniciar = document.getElementById('boton-reiniciar');
 const seccionAtaque = document.getElementById('seleccionar-ataque')
 const seccionMensajes = document.getElementById('mensajes');
@@ -48,18 +47,9 @@ class Mokepon {
         this.tipo = tipo;
         this.imagen = imagen;
         this.vida = vida;
-        this.ataque = [];
+        this.ataques = [];
     }
 }
-
-let capipepoObj = new Mokepon('Capipepo','capipepo','agua','./assets/capipepo.png','120');
-let hipodogeObj = new Mokepon('Hipodoge','hipodoge','agua','./assets/hipodoge.png','3');
-let langostelvisObj = new Mokepon('Langostelvis','langostelvis','agua','./assets/langostelvis.png','3');
-let pydosObj = new Mokepon('Pydos','pydos','agua','./assets/pydos.png','3');
-let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','agua','./assets/ratigueya.png','3');
-let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','agua','./assets/tucapalma.png','3');
-
-mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
 
 class Ataques {
     constructor(nombre,tipo,id,dmg){
@@ -70,26 +60,35 @@ class Ataques {
     }
 }
 
-let infernalAtk = new Ataques ('Fuego Infernal','🔥','infernal',15);
-let llamaradaAtk = new Ataques ('Llamarada','🔥','boton-fuego',9);
-let vulcanoAtk = new Ataques ('Vulcano','🔥','boton-fuego',8);
-let luzBrillanteAtk = new Ataques ('Luz Brillante','🔥','boton-fuego',11);
-let hydrojetAtk = new Ataques ('Hydrojet','💧','boton-agua',23);
-let tsunamiAtk = new Ataques ('Tsunami','💧','boton-agua',4);
-let lluviaAtk = new Ataques ('Lluvia Torrencial','💧','boton-agua',9);
-let ruedaAtk = new Ataques ('Rueda de Agua','💧','boton-agua',7);
-let penonazolAtk = new Ataques ('Peñonazo','🌱','boton-tierra',1);
-let terremotoAtk = new Ataques ('Terremoto','🌱','boton-tierra',12);
-let pantanoAtk = new Ataques ('Pantano Peligroso','🌱','boton-tierra',6);
-let raicesAtk = new Ataques ('Raices Traicioneras','🌱','boton-tierra',2);
-let healingAtk = new Ataques ('Vigor','✨','boton-healing',12);
+let capipepoObj = new Mokepon('Capipepo','capipepo','agua','./assets/capipepo.png','120');
+let hipodogeObj = new Mokepon('Hipodoge','hipodoge','agua','./assets/hipodoge.png','3');
+let langostelvisObj = new Mokepon('Langostelvis','langostelvis','agua','./assets/langostelvis.png','3');
+let pydosObj = new Mokepon('Pydos','pydos','agua','./assets/pydos.png','3');
+let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','agua','./assets/ratigueya.png','3');
+let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','agua','./assets/tucapalma.png','3');
 
-capipepoObj.ataque.push(lluviaAtk,pantanoAtk,raicesAtk);
-hipodogeObj.ataque.push(hydrojetAtk,tsunamiAtk,ruedaAtk,healingAtk);
-langostelvisObj.ataque.push(terremotoAtk,penonazolAtk,raicesAtk,pantanoAtk);
-pydosObj.ataque.push(infernalAtk,llamaradaAtk,vulcanoAtk,terremotoAtk);
-ratigueyaObj.ataque.push(luzBrillanteAtk,vulcanoAtk,penonazolAtk);
-tucapalmaObj.ataque.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
+let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
+let llamaradaAtk = new Ataques ('Llamarada','🔥','llamarada',3);
+let vulcanoAtk = new Ataques ('Vulcano','🔥','vulcano',2);
+let luzBrillanteAtk = new Ataques ('Luz Brillante','🔥','bright',1);
+let hydrojetAtk = new Ataques ('Hydrojet','💧','hydro',1);
+let tsunamiAtk = new Ataques ('Tsunami','💧','tsunami',2);
+let lluviaAtk = new Ataques ('Lluvia Torrencial','💧','lluvia',3);
+let ruedaAtk = new Ataques ('Rueda de Agua','💧','rueda',3);
+let penonazolAtk = new Ataques ('Peñonazo','🌱','penonazo',3);
+let terremotoAtk = new Ataques ('Terremoto','🌱','terremoto',5);
+let pantanoAtk = new Ataques ('Pantano Peligroso','🌱','pantano',1);
+let raicesAtk = new Ataques ('Raices Traicioneras','🌱','raices',2);
+let healingAtk = new Ataques ('Vigor','✨','healing',5);      
+
+mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
+
+capipepoObj.ataques.push(lluviaAtk,pantanoAtk,raicesAtk);
+hipodogeObj.ataques.push(hydrojetAtk,tsunamiAtk,ruedaAtk,healingAtk);
+langostelvisObj.ataques.push(terremotoAtk,penonazolAtk,raicesAtk,pantanoAtk,healingAtk);
+pydosObj.ataques.push(infernalAtk,llamaradaAtk,vulcanoAtk,terremotoAtk);
+ratigueyaObj.ataques.push(luzBrillanteAtk,vulcanoAtk,penonazolAtk);
+tucapalmaObj.ataques.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
 
 function iniciarJuego(){
     mokeponesArr.forEach((mok) => {
@@ -99,7 +98,7 @@ function iniciarJuego(){
                         <p>${mok.nombre}</p>
                         <img src=${mok.imagen} alt=${mok.nombre}>
                     </label>
-            `;
+            `
             tarjetasMokepones.innerHTML += contenedorMokepones;
 
     })
@@ -115,9 +114,6 @@ function iniciarJuego(){
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
-    /* botonFuego.addEventListener('click', ataqueFuego);
-    botonAgua.addEventListener('click', ataqueAgua);
-    botonTierra.addEventListener('click', ataqueTierra); */
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
@@ -125,6 +121,10 @@ function iniciarJuego(){
 
 function random(min,max){
     let random = Math.floor(Math.random()*(max-min+1)+min);
+    return random
+}
+function random2(min,max){
+    let random = Math.random()*(max-min+1)+min;
     return random
 }
 
@@ -145,13 +145,55 @@ function seleccionarMascotaJugador(){
     if(seleccionado == ''){
     alert('Por favor selecciona una mascota');
     }
+    extraerAtaques(seleccionado);
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
         habilitarSecciones(contenedorSeleccion,'none');
         habilitarSecciones(seccionAtaque,'grid');
         habilitarSecciones(seccionMensajes,'flex');
     }
-    botonesDeAtaque();
+}
+
+function extraerAtaques(seleccionado){
+    ataques
+    for (let i = 0; i < mokeponesArr.length; i++) {
+        if (seleccionado === mokeponesArr[i]) {
+            ataques = mokeponesArr[i].ataques
+        }
+    }
+    botonesDeAtaque(ataques);
+}
+
+function botonesDeAtaque(ataques){
+    ataques.forEach((ataque)=>{
+        contenedorBotonesAtaques.innerHTML += `
+        <button id=${ataque.id} class='${ataque.tipo} botones'>${ataque.nombre} ${ataque.tipo}</button>
+        `
+        ataque.boton = document.getElementById(ataque.id);
+    })
+    botones = document.querySelectorAll('.botones')
+
+    activadorAtaques(botones)
+}
+
+function activadorAtaques(arrs){
+    arrs.forEach((arr)=>{
+        if(arr.classList[0] == '💧'){
+            arr.addEventListener('click', atack)
+            console.log('💧')
+        }else if (arr.classList[0] == '🌱') {
+            arr.addEventListener('click', atack)
+            console.log('🌱')
+            
+        } else if (arr.classList[0] == '🔥') {
+            arr.addEventListener('click', atack)
+            console.log('🔥')
+            
+        } else if (arr.classList[0] == '✨') {
+            arr.addEventListener('click', atack)
+            console.log('✨') 
+        }
+    })
 }
 
 function seleccionarMascotasEnemigo(){
@@ -169,28 +211,14 @@ function seleccionarMascotasEnemigo(){
     mascotaEnemigo.innerHTML = mokeponesArr[seleccionEnemiga].nombre;
 }
 
-function botonesDeAtaque(){
-    ataquesMokepon = seleccionado.ataque;
-    console.log(ataquesMokepon);
-    for(i = 0; 0 < ataquesMokepon.length; i++){
-        console.log(ataquesMokepon[i])
-        contenedorBotonesAtaques.innerHTML += `
-        <button>${ataquesMokepon[i].nombre}</button>
-        `
-    }
-}
-
-function ataqueFuego(){
-    ataqueJugador = 'FUEGO';
-    combate();
-}
-function ataqueAgua(){
-    ataqueJugador = 'AGUA';
-    combate();
-}
-function ataqueTierra(){
-    ataqueJugador = 'TIERRA';
-    combate();
+function atack(i){
+    let ordenJugador = i.target.id
+    ataques.forEach(ataque => {
+        if(ataque.id === ordenJugador){
+            hitJugador = ataque.dmg*random2(random(0,3),random(4,6))
+        }
+    })
+    return hitJugador
 }
 
 function combate(){
@@ -222,22 +250,19 @@ function combate(){
     tipoAtaqueEnemigo.innerHTML = ataqueEnemigo;
     tipoAtaqueJugador.innerHTML = ataqueJugador;
     resultadoTruno.innerHTML = resultadoCombate;
-    colocarAtributo(tipoAtaqueJugador,'class',ataqueJugador);
-    colocarAtributo(tipoAtaqueEnemigo,'class',ataqueEnemigo);
-    colocarAtributo(resultadoTruno,'class',resultadoCombate);
     revisarVidas()
     
 }
 
 function revisarVidas(){
     if(vidasEnemigo == 0){
-        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado} es muy Fuerte.</p>`)
-        inhabilitarBotones();
+        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
+        inhabilitarBotones();
     }else if(vidasJugador == 0){
-        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado} es muy Debil aun.</p>`)
-        inhabilitarBotones();
+        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado.nombre} es muy Debil aun.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
+        inhabilitarBotones();
     }
 }
 
@@ -246,11 +271,9 @@ function crearMensaje(slector,textoHTML){
 }
 
 function inhabilitarBotones(){
-    botonAgua.disabled = true;
-    botonFuego.disabled = true;
-    botonTierra.disabled = true;
-    botonMascota.disabled = true;
-
+    botones.forEach((boton)=>{
+        boton.disabled = true;
+    })
 }
 
 function habilitarSecciones(elemento,atributo){
