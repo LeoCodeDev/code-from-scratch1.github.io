@@ -227,6 +227,11 @@ input:checked + label{
     color: #C3195D;
 }
 
+footer{
+    display: flex;
+    justify-content: center;
+}
+
 @media (max-width: 480px ){
     .contenedor-botones-ataque button{
         font-family: 'Bubblegum Sans', cursive;

@@ -5,19 +5,17 @@ let ataques = [];
 let ataquesEnemigo = [];
 let ataqueJugador = '';
 let ataqueEnemigo = '';
-let resultadoCombate = '';
 let vidasEnemigo;
 let vidasJugador;
 let seleccionado = '';
 let enemigo = '';
 let usoHealing = 3;
+let usoHealingE = 3;
 let hitJugador;
 let hitEnemigo;
 let contenedorMokepones;
 let contenedorElegidoJugador;
 let contenedorElegidoEnemigo;
-let valorClick;
-let tipoAtaque;
 let capipepo;
 let hipodoge;
 let ratigueya;
@@ -37,10 +35,6 @@ const seccionAtaque = document.getElementById('seleccionar-ataque')
 const seccionMensajes = document.getElementById('mensajes');
 const seccionReiniciar = document.getElementById('reiniciar');
 const contenedorSeleccion = document.getElementById('contenedor-seleccion');
-const contenedorReiniciar = document.getElementById('contenedor-reiniciar');
-const resultadoTruno = document.getElementById('resultado-turno');
-const nombreMokeponEnemigo = document.getElementById('nombre-mokepon-seleccionado-enemigo');
-const imgMokeponEnemigo = document.getElementById('mokepon-seleccionado-enemigo');
 const imgJugador = document.querySelector('.img-jugador');
 const imgEnemigo = document.querySelector('.img-enemigo');
 const contenedorBotonesAtaques = document.querySelector('.contenedor-botones-ataque');
@@ -66,11 +60,11 @@ class Ataques {
 }
 
 let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120);
+let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120);
 let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120);
 let langostelvisObj = new Mokepon('Langostelvis','langostelvis','💧','./assets/langostelvis.png',120);
 let pydosObj = new Mokepon('Pydos','pydos','🔥','./assets/pydos.png',120);
 let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120);
-let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120);
 
 let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
 let llamaradaAtk = new Ataques ('Llamarada','🔥','llamarada',3);
@@ -88,12 +82,12 @@ let healingAtk = new Ataques ('Vigor','✨','healing',5);
 
 mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
 
-capipepoObj.ataques.push(lluviaAtk,pantanoAtk,raicesAtk);
-hipodogeObj.ataques.push(hydrojetAtk,tsunamiAtk,ruedaAtk,healingAtk);
-langostelvisObj.ataques.push(terremotoAtk,penonazolAtk,raicesAtk,pantanoAtk,healingAtk);
-pydosObj.ataques.push(infernalAtk,llamaradaAtk,vulcanoAtk,terremotoAtk);
-ratigueyaObj.ataques.push(luzBrillanteAtk,vulcanoAtk,penonazolAtk);
-tucapalmaObj.ataques.push(hydrojetAtk,pantanoAtk,raicesAtk,tsunamiAtk);
+capipepoObj.ataques.push(lluviaAtk,pantanoAtk,raicesAtk,healingAtk);
+tucapalmaObj.ataques.push(vulcanoAtk,penonazolAtk,terremotoAtk,healingAtk);
+hipodogeObj.ataques.push(luzBrillanteAtk,tsunamiAtk,ruedaAtk,healingAtk);
+langostelvisObj.ataques.push(terremotoAtk,lluviaAtk,hydrojetAtk,healingAtk);
+pydosObj.ataques.push(terremotoAtk,infernalAtk,vulcanoAtk,healingAtk);
+ratigueyaObj.ataques.push(ruedaAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
 
 function iniciarJuego(){
     mokeponesArr.forEach((mok) => {
@@ -215,11 +209,18 @@ function atack(i){
             ataqueJugador = ordenJugador.textContent
         }
     })
-    let ordenEnemigo = ataquesEnemigo[random(0, ataquesEnemigo.length -1)];
+    let indiceOrden = random(0, ataquesEnemigo.length -1);
+    let ordenEnemigo = ataquesEnemigo[indiceOrden];
     ataquesEnemigo.forEach(ataqueE => {
         if (ataqueE.id === ordenEnemigo.id) {
             hitEnemigo = ataqueE.dmg*random2(random(0,3),random(4,6))
             ataqueEnemigo = `${ataqueE.nombre} ${ataqueE.tipo}`;
+                if(ataqueE.tipo === '✨'){
+                    usoHealingE--
+                    if(usoHealingE <= 0){
+                        ataquesEnemigo.pop(indiceOrden)
+                    }
+                }
         }
     });
     if(ordenJugador.classList[0] === '✨'){
