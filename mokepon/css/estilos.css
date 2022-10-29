@@ -31,7 +31,7 @@ body{
 
 .tarjetas-mokepones{
     display: flex;
-    width: 320px;
+    width: 380px;
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -42,11 +42,11 @@ body{
     align-content: center;
     justify-content: space-evenly;
     align-items: center;
-    width: 100px;
-    height: 120px;
-    background-color: #00ABB3; 
+    width: 120px;
+    height: 156px;
+    background-color: #00ABB3;
     color: #3C4048;
-    gap: 5px;   
+    gap: 5px;
     border-radius: 15px;
 }
 
@@ -125,7 +125,7 @@ input:checked + label{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 40px;
+    gap: 25px;
 }
 
 .contenedor-mensaje-combate p:nth-child(1){
@@ -137,6 +137,9 @@ input:checked + label{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     height: 150px;
+    width: 150px;
+    border: 3px solid #00ABB3;
+    border-radius: 25px;
 }
 
 .info-combate-jugador div, .info-combate-enemigo div{
@@ -228,11 +231,11 @@ input:checked + label{
     .contenedor-botones-ataque button{
         font-family: 'Bubblegum Sans', cursive;
         color: #00ABB3;
-        margin: 2px;
-        width: 60px;
-        height: 60px;
+        margin: 4px;
+        width: 85px;
+        height: 85px;
         font-size: medium;
-        border-radius: 35px;
+        border-radius: 50px;
         border: 2px solid #00ABB3;
         background-color: transparent;
         margin-bottom: 15px;
@@ -242,7 +245,7 @@ input:checked + label{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 5px;
+        gap: 0px;
         justify-items: center;
     }
 
@@ -254,6 +257,17 @@ input:checked + label{
     .info-combate-enemigo{
         grid-column-start: 3;
         grid-row-start: 1;
+    }
+
+    .info-combate-enemigo, .info-combate-jugador{
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .mokepones{
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        width: 156px;
     }
 
     .img-jugador{
@@ -277,6 +291,13 @@ input:checked + label{
     }
 
     .contenedor-botones-ataque{
+        margin: 30px;
+        display: flex;
         grid-row-start: 3;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .tarjetas-mokepones{
+        justify-content: center;
     }
 }

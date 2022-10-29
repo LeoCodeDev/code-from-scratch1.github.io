@@ -289,13 +289,12 @@ function combate(tipoAtkJugador, tipoAtkEnemigo, hitJugador, hitEnemigo){
 function revisarVidas(){
     if(vidasJugador <= 0){
         vidaMascotaJugador.innerHTML = 0;
-        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado.nombre} es muy Debil aun.</p>`)
+        crearMensaje(seccionMensajes,`<p><span class="PERDISTE">Perdiste!!!</span>, Tu ${seleccionado.nombre} es muy Debil aun.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
         inhabilitarBotones();
-    }
-    if(vidasEnemigo <= 0){
+    }else if(vidasEnemigo <= 0){
         vidaMascotaEnemigo.innerHTML = 0;
-        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
+        crearMensaje(seccionMensajes,`<p><span class="GANASTE">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
         inhabilitarBotones();
     } 
