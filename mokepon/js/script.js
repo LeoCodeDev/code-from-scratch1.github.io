@@ -22,6 +22,9 @@ let ratigueya;
 let langostelvis;
 let tucapalma;
 let pydos;
+let dragosaurio;
+let zalamander;
+let flamix;
 const mascotaJugador = document.getElementById('mascota-jugador');
 const mascotaEnemigo = document.getElementById('mascota-enemigo');
 const tarjetasMokepones = document.querySelector('.tarjetas-mokepones');
@@ -61,10 +64,13 @@ class Ataques {
 
 let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120);
 let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120);
+let dragosaurioObj = new Mokepon('Dragosaurio','dragosaurio','🌱','./assets/dragosaurio.png',120);
 let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120);
 let pydosObj = new Mokepon('Pydos','pydos','💧','./assets/pydos.png',120);
+let zalamanderObj = new Mokepon('Zalamander','zalamander','💧','./assets/zalamander.png',120);
 let langostelvisObj = new Mokepon('Langostelvis','langostelvis','🔥','./assets/langostelvis.png',120);
 let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120);
+let flamixObj = new Mokepon('Flamix','flamix','🔥','./assets/flamix.png',120);
 
 let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
 let llamaradaAtk = new Ataques ('Llamarada','🔥','llamarada',3);
@@ -80,14 +86,17 @@ let pantanoAtk = new Ataques ('Pantano Peligroso','🌱','pantano',1);
 let raicesAtk = new Ataques ('Raices Traicioneras','🌱','raices',2);
 let healingAtk = new Ataques ('Vigor','✨','healing',5);      
 
-mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj);
+mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,tucapalmaObj,dragosaurioObj,zalamanderObj,flamixObj);
 
 capipepoObj.ataques.push(lluviaAtk,pantanoAtk,raicesAtk,healingAtk);
 tucapalmaObj.ataques.push(vulcanoAtk,penonazolAtk,terremotoAtk,healingAtk);
+dragosaurioObj.ataques.push(terremotoAtk,pantanoAtk,raicesAtk,healingAtk);
 hipodogeObj.ataques.push(luzBrillanteAtk,tsunamiAtk,ruedaAtk,healingAtk);
 pydosObj.ataques.push(terremotoAtk,lluviaAtk,hydrojetAtk,healingAtk);
+zalamanderObj.ataques.push(ruedaAtk,tsunamiAtk,lluviaAtk,healingAtk);
 langostelvisObj.ataques.push(terremotoAtk,infernalAtk,vulcanoAtk,healingAtk);
 ratigueyaObj.ataques.push(ruedaAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
+flamixObj.ataques.push(infernalAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
 
 function iniciarJuego(){
     mokeponesArr.forEach((mok) => {
@@ -99,7 +108,6 @@ function iniciarJuego(){
                     </label>
             `
             tarjetasMokepones.innerHTML += contenedorMokepones;
-
     })
 
     capipepo = document.getElementById('capipepo');
@@ -108,8 +116,11 @@ function iniciarJuego(){
     langostelvis = document.getElementById('langostelvis');
     tucapalma = document.getElementById('tucapalma');
     pydos = document.getElementById('pydos');
+    dragosaurio = document.getElementById('dragosaurio');
+    zalamander = document.getElementById('zalamander');
+    flamix = document.getElementById('flamix');
 
-    elementosMoke.push(capipepo,hipodoge,langostelvis,pydos,ratigueya,tucapalma);
+    elementosMoke.push(capipepo,hipodoge,langostelvis,pydos,ratigueya,tucapalma,dragosaurio,zalamander,flamix);
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
