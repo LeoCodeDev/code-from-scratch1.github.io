@@ -227,6 +227,8 @@ function atack(i){
         usoHealing--
         ordenJugador.textContent = `Vigor ✨ ${usoHealing}/3`;
         if(usoHealing <= 0){
+            ordenJugador.style.borderColor = '#00aab37c'
+            ordenJugador.style.color = '#00aab37c'
             ordenJugador.disabled = true
         }
     }
