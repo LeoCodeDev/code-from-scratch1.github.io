@@ -62,8 +62,8 @@ class Ataques {
 let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120);
 let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120);
 let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120);
-let langostelvisObj = new Mokepon('Langostelvis','langostelvis','💧','./assets/langostelvis.png',120);
-let pydosObj = new Mokepon('Pydos','pydos','🔥','./assets/pydos.png',120);
+let pydosObj = new Mokepon('Pydos','pydos','💧','./assets/pydos.png',120);
+let langostelvisObj = new Mokepon('Langostelvis','langostelvis','🔥','./assets/langostelvis.png',120);
 let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120);
 
 let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
@@ -85,8 +85,8 @@ mokeponesArr.push(capipepoObj,hipodogeObj,langostelvisObj,pydosObj,ratigueyaObj,
 capipepoObj.ataques.push(lluviaAtk,pantanoAtk,raicesAtk,healingAtk);
 tucapalmaObj.ataques.push(vulcanoAtk,penonazolAtk,terremotoAtk,healingAtk);
 hipodogeObj.ataques.push(luzBrillanteAtk,tsunamiAtk,ruedaAtk,healingAtk);
-langostelvisObj.ataques.push(terremotoAtk,lluviaAtk,hydrojetAtk,healingAtk);
-pydosObj.ataques.push(terremotoAtk,infernalAtk,vulcanoAtk,healingAtk);
+pydosObj.ataques.push(terremotoAtk,lluviaAtk,hydrojetAtk,healingAtk);
+langostelvisObj.ataques.push(terremotoAtk,infernalAtk,vulcanoAtk,healingAtk);
 ratigueyaObj.ataques.push(ruedaAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
 
 function iniciarJuego(){
