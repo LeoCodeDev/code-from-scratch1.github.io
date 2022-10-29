@@ -6,8 +6,8 @@ let ataquesEnemigo = [];
 let ataqueJugador = '';
 let ataqueEnemigo = '';
 let resultadoCombate = '';
-let vidasEnemigo = 3 ;
-let vidasJugador = 10 ;
+let vidasEnemigo;
+let vidasJugador;
 let seleccionado = '';
 let enemigo = '';
 let hitJugador;
@@ -64,12 +64,12 @@ class Ataques {
     }
 }
 
-let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png','120');
-let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png','120');
-let langostelvisObj = new Mokepon('Langostelvis','langostelvis','💧','./assets/langostelvis.png','120');
-let pydosObj = new Mokepon('Pydos','pydos','🔥','./assets/pydos.png','120');
-let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png','120');
-let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png','120');
+let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120);
+let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120);
+let langostelvisObj = new Mokepon('Langostelvis','langostelvis','💧','./assets/langostelvis.png',120);
+let pydosObj = new Mokepon('Pydos','pydos','🔥','./assets/pydos.png',120);
+let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120);
+let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120);
 
 let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
 let llamaradaAtk = new Ataques ('Llamarada','🔥','llamarada',3);
@@ -156,6 +156,7 @@ function seleccionarMascotaJugador(){
         habilitarSecciones(seccionMensajes,'flex');
     }
     vidasJugador = seleccionado.vida
+    vidaMascotaJugador.innerHTML = vidasJugador;
     ataques = seleccionado.ataques
     ataquesEnemigo = enemigo.ataques
     botonesDeAtaque(ataques);
@@ -201,6 +202,7 @@ function seleccionarMascotasEnemigo(){
     imgEnemigo.innerHTML = contenedorElegidoEnemigo;
     mascotaEnemigo.innerHTML = mokeponesArr[seleccionEnemiga].nombre;
     vidasEnemigo = enemigo.vida
+    vidaMascotaEnemigo.innerHTML = vidasEnemigo;
     return enemigo
 }
 
@@ -277,17 +279,18 @@ function combate(tipoAtkJugador, tipoAtkEnemigo, hitJugador, hitEnemigo){
 }
 
 function revisarVidas(){
-    if(vidasEnemigo <= 0){
-        vidaMascotaEnemigo.innerHTML = 0
-        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
-        habilitarSecciones(seccionReiniciar,'flex');
-        inhabilitarBotones();
-    }else if(vidasJugador <= 0){
-        vidaMascotaJugador.innerHTM = 0
+    if(vidasJugador <= 0){
+        vidaMascotaJugador.innerHTML = 0;
         crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Perdiste!!!</span>, Tu ${seleccionado.nombre} es muy Debil aun.</p>`)
         habilitarSecciones(seccionReiniciar,'flex');
         inhabilitarBotones();
     }
+    if(vidasEnemigo <= 0){
+        vidaMascotaEnemigo.innerHTML = 0;
+        crearMensaje(seccionMensajes,`<p><span class="${resultadoCombate}">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
+        habilitarSecciones(seccionReiniciar,'flex');
+        inhabilitarBotones();
+    } 
 }
 
 function crearMensaje(slector,textoHTML){
