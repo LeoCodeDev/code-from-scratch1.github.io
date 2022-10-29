@@ -10,6 +10,7 @@ let vidasEnemigo;
 let vidasJugador;
 let seleccionado = '';
 let enemigo = '';
+let usoHealing = 3;
 let hitJugador;
 let hitEnemigo;
 let contenedorMokepones;
@@ -221,6 +222,13 @@ function atack(i){
             ataqueEnemigo = `${ataqueE.nombre} ${ataqueE.tipo}`;
         }
     });
+    if(ordenJugador.classList[0] === '✨'){
+        usoHealing--
+        ordenJugador.textContent = `Vigor ✨ ${usoHealing}/3`;
+        if(usoHealing <= 0){
+            ordenJugador.disabled = true
+        }
+    }
     combate(ordenJugador.classList[0],ordenEnemigo.tipo,hitJugador,hitEnemigo)
 }
 
