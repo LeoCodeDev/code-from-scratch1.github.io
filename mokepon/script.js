@@ -1,3 +1,5 @@
+import { verMapa, mapa , eventoColision, lienzo} from './js/canvas.js'
+
 //Seccion de Declaracion de Variables y funciones
 let mokeponesArr = [];
 let elementosMoke = [];
@@ -25,6 +27,7 @@ let pydos;
 let dragosaurio;
 let zalamander;
 let flamix;
+let botones;
 const mascotaJugador = document.getElementById('mascota-jugador');
 const mascotaEnemigo = document.getElementById('mascota-enemigo');
 const tarjetasMokepones = document.querySelector('.tarjetas-mokepones');
@@ -96,7 +99,7 @@ pydosObj.ataques.push(terremotoAtk,lluviaAtk,hydrojetAtk,healingAtk);
 zalamanderObj.ataques.push(ruedaAtk,tsunamiAtk,lluviaAtk,healingAtk);
 langostelvisObj.ataques.push(terremotoAtk,infernalAtk,vulcanoAtk,healingAtk);
 ratigueyaObj.ataques.push(ruedaAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
-flamixObj.ataques.push(infernalAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
+flamixObj.ataques.push(infernalAtk,luzBrillanteAtk,llamaradaAtk,healingAtk);
 
 function iniciarJuego(){
     mokeponesArr.forEach((mok) => {
@@ -124,6 +127,7 @@ function iniciarJuego(){
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
+    habilitarSecciones(verMapa, 'none');
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
@@ -139,7 +143,7 @@ function random2(min,max){
 }
 
 function seleccionarMascotaJugador(){
-    for(i = 0; i < elementosMoke.length; i++){
+    for(let i = 0; i < elementosMoke.length; i++){
         if(elementosMoke[i].checked){
             contenedorElegidoJugador = `
             <label for=${mokeponesArr[i].id} class="mokepones">
@@ -157,9 +161,8 @@ function seleccionarMascotaJugador(){
     }
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
+        habilitarSecciones(verMapa,'flex');
         habilitarSecciones(contenedorSeleccion,'none');
-        habilitarSecciones(seccionAtaque,'grid');
-        habilitarSecciones(seccionMensajes,'flex');
     }
     vidasJugador = seleccionado.vida
     vidaMascotaJugador.innerHTML = vidasJugador;
@@ -337,3 +340,5 @@ function reiniciarJuego(){
 }
 
 window.addEventListener('load', iniciarJuego);
+
+export {habilitarSecciones , seccionAtaque , seccionMensajes}
