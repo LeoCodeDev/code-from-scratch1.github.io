@@ -41,6 +41,9 @@ const contenedorSeleccion = document.getElementById('contenedor-seleccion');
 const imgJugador = document.querySelector('.img-jugador');
 const imgEnemigo = document.querySelector('.img-enemigo');
 const contenedorBotonesAtaques = document.querySelector('.contenedor-botones-ataque');
+const verMapa = document.getElementById('ver-mapa');
+const mapa = document.getElementById('mapa')
+const colision = document.getElementById('colision')
 
 class Mokepon {
     constructor(nombre,id,tipo,imagen,vida) {
@@ -124,10 +127,14 @@ function iniciarJuego(){
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
+    colision.addEventListener('click', eventoColision)
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
+    verMapa.style.display = 'none'
 }
+
+
 
 function random(min,max){
     let random = Math.floor(Math.random()*(max-min+1)+min);
@@ -157,15 +164,21 @@ function seleccionarMascotaJugador(){
     }
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
-        habilitarSecciones(contenedorSeleccion,'none');
-        habilitarSecciones(seccionAtaque,'grid');
-        habilitarSecciones(seccionMensajes,'flex');
+        contenedorSeleccion.style.display = 'none'
+        verMapa.style.display = 'flex'
+        
     }
     vidasJugador = seleccionado.vida
     vidaMascotaJugador.innerHTML = vidasJugador;
     ataques = seleccionado.ataques
     ataquesEnemigo = enemigo.ataques
     botonesDeAtaque(ataques);
+}
+
+function eventoColision(){
+    verMapa.style.display = 'none'
+    seccionAtaque.style.display = 'grid'
+    seccionMensajes.style.display = 'flex'
 }
 
 function botonesDeAtaque(ataques){
