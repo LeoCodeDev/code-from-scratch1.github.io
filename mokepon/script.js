@@ -1,5 +1,3 @@
-import { verMapa, mapa , eventoColision, lienzo} from './js/canvas.js'
-
 //Seccion de Declaracion de Variables y funciones
 let mokeponesArr = [];
 let elementosMoke = [];
@@ -130,11 +128,7 @@ function iniciarJuego(){
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
-<<<<<<< HEAD:mokepon/js/script.js
     colision.addEventListener('click', eventoColision)
-=======
-    habilitarSecciones(verMapa, 'none');
->>>>>>> a49138d6c703a36cb7efca9931b6bc06d846238f:mokepon/script.js
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
@@ -171,14 +165,9 @@ function seleccionarMascotaJugador(){
     }
     seleccionarMascotasEnemigo();
     if(seleccionado != ''){
-<<<<<<< HEAD:mokepon/js/script.js
         contenedorSeleccion.style.display = 'none'
         verMapa.style.display = 'flex'
         
-=======
-        habilitarSecciones(verMapa,'flex');
-        habilitarSecciones(contenedorSeleccion,'none');
->>>>>>> a49138d6c703a36cb7efca9931b6bc06d846238f:mokepon/script.js
     }
     vidasJugador = seleccionado.vida
     vidaMascotaJugador.innerHTML = vidasJugador;
@@ -329,12 +318,12 @@ function revisarVidas(){
     if(vidasJugador <= 0){
         vidaMascotaJugador.innerHTML = 0;
         crearMensaje(seccionMensajes,`<p><span class="PERDISTE">Perdiste!!!</span>, Tu ${seleccionado.nombre} es muy Debil aun.</p>`)
-        habilitarSecciones(seccionReiniciar,'flex');
+        seccionReiniciar.style.display = 'flex'
         inhabilitarBotones();
     }else if(vidasEnemigo <= 0){
         vidaMascotaEnemigo.innerHTML = 0;
         crearMensaje(seccionMensajes,`<p><span class="GANASTE">Ganaste!!!</span>, Tu ${seleccionado.nombre} es muy Fuerte.</p>`)
-        habilitarSecciones(seccionReiniciar,'flex');
+        seccionReiniciar.style.display = 'flex'
         inhabilitarBotones();
     } 
 }
@@ -349,10 +338,6 @@ function inhabilitarBotones(){
     })
 }
 
-function habilitarSecciones(elemento,atributo){
-    elemento.style.display = atributo;
-}
-
 function colocarAtributo(identificador,atributo,valorAtributo){
     return identificador.setAttribute(atributo,valorAtributo);
 }
@@ -362,5 +347,3 @@ function reiniciarJuego(){
 }
 
 window.addEventListener('load', iniciarJuego);
-
-export {habilitarSecciones , seccionAtaque , seccionMensajes}
