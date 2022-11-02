@@ -11,7 +11,6 @@ let seleccionado = '';
 let enemigo = '';
 let usoHealing = 3;
 let usoHealingE = 3;
-let cantidadEnemigos = random(2, 5)
 let hitJugador;
 let hitEnemigo;
 let contenedorMokepones;
@@ -28,6 +27,9 @@ let zalamander;
 let flamix;
 let botones;
 let interval
+let anchoMapa
+let altoProposional
+let anchoMaximoMapa = 600
 const mascotaJugador = document.getElementById('mascota-jugador');
 const mascotaEnemigo = document.getElementById('mascota-enemigo');
 const tarjetasMokepones = document.querySelector('.tarjetas-mokepones');
@@ -46,7 +48,6 @@ const imgEnemigo = document.querySelector('.img-enemigo');
 const contenedorBotonesAtaques = document.querySelector('.contenedor-botones-ataque');
 const verMapa = document.getElementById('ver-mapa');
 const mapa = document.getElementById('mapa')
-const colision = document.getElementById('colision')
 const lienzo = mapa.getContext('2d')
 const moveUp = document.getElementById('move-up')
 const moveDown = document.getElementById('move-dw')
@@ -54,6 +55,16 @@ const moveRight = document.getElementById('move-rg')
 const moveLeft = document.getElementById('move-lf')
 const mapaBackground = new Image()
 mapaBackground.src = './assets/mokemap.png'
+
+anchoMapa = window.innerWidth - 20
+altoProposional = anchoMapa * 600 / 800
+
+if (window.innerWidth > anchoMaximoMapa){
+    anchoMapa = anchoMaximoMapa
+    altoProposional = anchoMapa * 600 / 800
+}
+mapa.width = anchoMapa
+mapa.height = altoProposional
 
 class Mokepon {
     constructor(nombre,id,tipo,imagen,vida, avatar, x = 10, y = 10) {
@@ -63,10 +74,10 @@ class Mokepon {
         this.imagen = imagen;
         this.vida = vida;
         this.ataques = [];
-        this.x = x
-        this.y = y
         this.ancho = 30
         this.alto = 30
+        this.x = random(0, anchoMapa - this.ancho)
+        this.y = random(0, altoProposional - this.alto)
         this.mapImg = new Image()
         this.mapImg.src = avatar
         this.velocidadX = 0
@@ -92,24 +103,24 @@ class Ataques {
     }
 }
 
-let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120, './assets/capipepo_head.png',random(0,480), random(0,360));
-let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120, './assets/tucapalma_head.png',random(0,480), random(0,360));
-let dragosaurioObj = new Mokepon('Dragosaurio','dragosaurio','🌱','./assets/dragosaurio.png',120, './assets/dragosaurio_head.png',random(0,480), random(0,360));
-let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120, './assets/hipodoge_head.png',random(0,480), random(0,360));
-let pydosObj = new Mokepon('Pydos','pydos','💧','./assets/pydos.png',120, './assets/pydos_head.png',random(0,480), random(0,360));
-let zalamanderObj = new Mokepon('Zalamander','zalamander','💧','./assets/zalamander.png',120, './assets/zalamander_head.png',random(0,480), random(0,360));
-let langostelvisObj = new Mokepon('Langostelvis','langostelvis','🔥','./assets/langostelvis.png',120, './assets/langostelvis_head.png',random(0,480), random(0,360));
-let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120, './assets/ratigueya_head.png',random(0,480), random(0,360));
-let flamixObj = new Mokepon('Flamix','flamix','🔥','./assets/flamix.png',120, './assets/flamix_head.png',random(0,480), random(0,360));
-let enemiCapipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120, './assets/capipepo_head.png',random(0,480), random(0,360));
-let enemiTucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120, './assets/tucapalma_head.png',random(0,480), random(0,360));
-let enemiDragosaurioObj = new Mokepon('Dragosaurio','dragosaurio','🌱','./assets/dragosaurio.png',120, './assets/dragosaurio_head.png',random(0,480), random(0,360));
-let enemiHipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120, './assets/hipodoge_head.png',random(0,480), random(0,360));
-let enemiPydosObj = new Mokepon('Pydos','pydos','💧','./assets/pydos.png',120, './assets/pydos_head.png',random(0,480), random(0,360));
-let enemiZalamanderObj = new Mokepon('Zalamander','zalamander','💧','./assets/zalamander.png',120, './assets/zalamander_head.png',random(0,480), random(0,360));
-let enemiLangostelvisObj = new Mokepon('Langostelvis','langostelvis','🔥','./assets/langostelvis.png',120, './assets/langostelvis_head.png',random(0,480), random(0,360));
-let enemiRatigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120, './assets/ratigueya_head.png',random(0,480), random(0,360));
-let enemiFlamixObj = new Mokepon('Flamix','flamix','🔥','./assets/flamix.png',120, './assets/flamix_head.png',random(0,480), random(0,360));
+let capipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120, './assets/capipepo_head.png');
+let tucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120, './assets/tucapalma_head.png');
+let dragosaurioObj = new Mokepon('Dragosaurio','dragosaurio','🌱','./assets/dragosaurio.png',120, './assets/dragosaurio_head.png');
+let hipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120, './assets/hipodoge_head.png');
+let pydosObj = new Mokepon('Pydos','pydos','💧','./assets/pydos.png',120, './assets/pydos_head.png');
+let zalamanderObj = new Mokepon('Zalamander','zalamander','💧','./assets/zalamander.png',120, './assets/zalamander_head.png');
+let langostelvisObj = new Mokepon('Langostelvis','langostelvis','🔥','./assets/langostelvis.png',120, './assets/langostelvis_head.png');
+let ratigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120, './assets/ratigueya_head.png');
+let flamixObj = new Mokepon('Flamix','flamix','🔥','./assets/flamix.png',120, './assets/flamix_head.png');
+let enemiCapipepoObj = new Mokepon('Capipepo','capipepo','🌱','./assets/capipepo.png',120, './assets/capipepo_head.png');
+let enemiTucapalmaObj = new Mokepon('Tucapalma','tucapalma','🌱','./assets/tucapalma.png',120, './assets/tucapalma_head.png');
+let enemiDragosaurioObj = new Mokepon('Dragosaurio','dragosaurio','🌱','./assets/dragosaurio.png',120, './assets/dragosaurio_head.png');
+let enemiHipodogeObj = new Mokepon('Hipodoge','hipodoge','💧','./assets/hipodoge.png',120, './assets/hipodoge_head.png');
+let enemiPydosObj = new Mokepon('Pydos','pydos','💧','./assets/pydos.png',120, './assets/pydos_head.png');
+let enemiZalamanderObj = new Mokepon('Zalamander','zalamander','💧','./assets/zalamander.png',120, './assets/zalamander_head.png');
+let enemiLangostelvisObj = new Mokepon('Langostelvis','langostelvis','🔥','./assets/langostelvis.png',120, './assets/langostelvis_head.png');
+let enemiRatigueyaObj = new Mokepon('Ratigüeya','ratigueya','🔥','./assets/ratigueya.png',120, './assets/ratigueya_head.png');
+let enemiFlamixObj = new Mokepon('Flamix','flamix','🔥','./assets/flamix.png',120, './assets/flamix_head.png');
 
 let infernalAtk = new Ataques ('Fuego Infernal','🔥','inferno',4);
 let llamaradaAtk = new Ataques ('Llamarada','🔥','llamarada',3);
@@ -146,6 +157,7 @@ enemiLangostelvisObj.ataques.push(terremotoAtk,infernalAtk,vulcanoAtk,healingAtk
 enemiRatigueyaObj.ataques.push(ruedaAtk,luzBrillanteAtk,vulcanoAtk,healingAtk);
 enemiFlamixObj.ataques.push(infernalAtk,luzBrillanteAtk,llamaradaAtk,healingAtk);
 
+
 function iniciarJuego(){
     mokeponesArr.forEach((mok) => {
         contenedorMokepones = `
@@ -172,7 +184,6 @@ function iniciarJuego(){
     
     botonReiniciar.addEventListener('click', reiniciarJuego)
     botonMascota.addEventListener('click', seleccionarMascotaJugador);
-    colision.addEventListener('click', eventoColision)
     seccionAtaque.style.display = 'none'
     seccionMensajes.style.display = 'none'
     seccionReiniciar.style.display = 'none'
@@ -209,9 +220,9 @@ function seleccionarMascotaJugador(){
     if(seleccionado != ''){
         contenedorSeleccion.style.display = 'none'
         verMapa.style.display = 'flex'
-        seleccionado.x = 330
-        seleccionado.y = 110
         iniciarMapa()
+        seleccionado.x = anchoMapa - (anchoMapa * 0.3)
+        seleccionado.y = altoProposional - (altoProposional * 0.7)
     }
     vidasJugador = seleccionado.vida
     vidaMascotaJugador.innerHTML = vidasJugador;
@@ -221,11 +232,10 @@ function seleccionarMascotaJugador(){
 }
 
 function iniciarMapa(){
-    mapa.width = 480
-    mapa.height = 360
     crearMapa()
     
     interval = setInterval(crearMapa,40)
+
     window.addEventListener('mousedown', e=>{
         if (e.path[0].id === 'move-up'){
             up()
@@ -238,7 +248,28 @@ function iniciarMapa(){
         }
     })
 
+    window.addEventListener('touchstart', e=>{
+        if (e.path[0].id === 'move-up'){
+            up()
+        } else if (e.path[0].id === 'move-dw'){
+            down()
+        } else if (e.path[0].id === 'move-rg'){
+            right()
+        }else if (e.path[0].id === 'move-lf'){
+            left()
+        }
+    })
+
     window.addEventListener('mouseup', e=>{
+        if (e.path[0].id === 'move-up' ||
+        e.path[0].id === 'move-dw' ||
+        e.path[0].id === 'move-rg' ||
+        e.path[0].id === 'move-lf'){
+            stop()
+        }
+    })
+
+    window.addEventListener('touchend', e=>{
         if (e.path[0].id === 'move-up' ||
         e.path[0].id === 'move-dw' ||
         e.path[0].id === 'move-rg' ||

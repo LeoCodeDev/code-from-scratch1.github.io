@@ -100,6 +100,10 @@ input:checked + label{
     align-content: center;
 }
 
+#ver-mapa div{
+    display: none;
+}
+
 #mapa {
     border: 2px solid #B2B2B2;
 }
@@ -243,6 +247,8 @@ footer{
     justify-content: center;
 }
 
+
+
 @media (max-width: 480px ){
     .contenedor-botones-ataque button{
         font-family: 'Bubblegum Sans', cursive;
@@ -258,6 +264,8 @@ footer{
     }
 
     .contenedor-mensaje-combate{
+        margin: 0;
+        padding: 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
@@ -278,12 +286,13 @@ footer{
     .info-combate-enemigo, .info-combate-jugador{
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        width: 100px;
     }
 
     .mokepones{
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        width: 156px;
+        width: 106px;
     }
 
     .img-jugador{
@@ -316,4 +325,38 @@ footer{
     .tarjetas-mokepones{
         justify-content: center;
     }
+
+    #tipo-ataque-jugador, #tipo-ataque-enemigo{
+        border: 1px solid #C3195D;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+    }
+}
+
+@media (max-width: 770px ){
+    #ver-mapa div{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    #move-up {
+        grid-column-start: 2;
+        grid-row-start: 1;
+    }
+    #move-lf {
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+    #move-rg {
+        grid-column-start: 3;
+        grid-row-start: 2;
+    }
+    #move-dw {
+        grid-column-start: 2;
+        grid-row-start: 3;
+    }
+
+    
+
 }
