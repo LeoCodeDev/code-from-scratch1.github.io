@@ -118,6 +118,12 @@ input:checked + label{
     color: #B2B2B2;
 }
 
+.contenedor-botones-ataque {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .contenedor-botones-ataque button{
     font-family: 'Bubblegum Sans', cursive;
     color: #00ABB3;
@@ -327,14 +333,13 @@ footer{
     }
 
     #tipo-ataque-jugador, #tipo-ataque-enemigo{
-        border: 1px solid #C3195D;
         justify-content: center;
         text-align: center;
         margin: 0;
     }
 }
 
-@media (max-width: 770px ){
+@media (max-width: 955px ){
     #ver-mapa div{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -371,6 +376,10 @@ footer{
         grid-row-start: 3;
     }
 
-    
+    .contenedor-botones-ataque button:hover{
+        color: #3C4048;
+        cursor: pointer;
+        background-color: #00ABB3;
+    }
 
 }
