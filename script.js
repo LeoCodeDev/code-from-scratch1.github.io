@@ -258,6 +258,7 @@ function iniciarMapa(){
         }else if (e.path[0].id === 'move-lf'){
             left()
         }
+        stopImmediatePropagation();
     })
 
     window.addEventListener('mouseup', e=>{
@@ -275,6 +276,7 @@ function iniciarMapa(){
         e.path[0].id === 'move-rg' ||
         e.path[0].id === 'move-lf'){
             stop()
+            stopImmediatePropagation();
         }
     })
 
@@ -528,6 +530,7 @@ function inhabilitarBotones(){
     botones.forEach((boton)=>{
         boton.disabled = true;
     })
+    contenedorBotonesAtaques.style.display = 'none'
 }
 
 function colocarAtributo(identificador,atributo,valorAtributo){
