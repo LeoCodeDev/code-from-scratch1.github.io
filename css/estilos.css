@@ -376,6 +376,10 @@ footer{
         grid-row-start: 3;
     }
 
+    .contenedor-botones-ataque {
+        grid-row-start: 3;
+    }
+
     .contenedor-botones-ataque button:hover{
         color: #3C4048;
         cursor: pointer;
